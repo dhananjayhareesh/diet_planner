@@ -1,3 +1,4 @@
+import 'package:dietplanner_project/screens/add_food.dart';
 import 'package:flutter/material.dart';
 
 class FoodCard extends StatelessWidget {
@@ -31,7 +32,15 @@ class FoodCard extends StatelessWidget {
                 SizedBox(
                     height: 25,
                     width: 30,
-                    child: Image.asset('assets/plus-sign.png'))
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AddFood(
+                                    appBarTitle: 'Breakfast',
+                                    appBarColor: Colors.deepPurple,
+                                  )));
+                        },
+                        child: Image.asset('assets/plus-sign.png')))
               ],
             ),
           ),
@@ -63,7 +72,15 @@ class FoodCard extends StatelessWidget {
                 SizedBox(
                     height: 25,
                     width: 30,
-                    child: Image.asset('assets/plus-sign.png'))
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AddFood(
+                                    appBarTitle: 'Lunch',
+                                    appBarColor: Colors.green,
+                                  )));
+                        },
+                        child: Image.asset('assets/plus-sign.png')))
               ],
             ),
           ),
@@ -95,7 +112,15 @@ class FoodCard extends StatelessWidget {
                 SizedBox(
                     height: 25,
                     width: 30,
-                    child: Image.asset('assets/plus-sign.png'))
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AddFood(
+                                    appBarTitle: 'Snacks',
+                                    appBarColor: Colors.yellow,
+                                  )));
+                        },
+                        child: Image.asset('assets/plus-sign.png')))
               ],
             ),
           ),
@@ -127,7 +152,15 @@ class FoodCard extends StatelessWidget {
                 SizedBox(
                     height: 25,
                     width: 30,
-                    child: Image.asset('assets/plus-sign.png'))
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AddFood(
+                                    appBarTitle: 'Dinner',
+                                    appBarColor: Colors.red,
+                                  )));
+                        },
+                        child: Image.asset('assets/plus-sign.png')))
               ],
             ),
           ),
