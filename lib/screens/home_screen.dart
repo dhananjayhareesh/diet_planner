@@ -30,121 +30,128 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: 300,
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 7, 69, 120),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(50),
-                      bottomRight: Radius.circular(50))),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 70,
-                        ),
-                        SizedBox(
-                          child: Image.asset('assets/leftar.png'),
-                          height: 20,
-                          width: 20,
-                        ),
-                        const SizedBox(
-                          width: 40,
-                        ),
-                        const Text(
-                          '14-october-2023',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
-                        const SizedBox(
-                          width: 40,
-                        ),
-                        SizedBox(
-                          child: Image.asset('assets/rightar.png'),
-                          height: 20,
-                          width: 20,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 40, top: 40),
-                        child: CircularPercentIndicator(
-                          radius: 80,
-                          lineWidth: 15,
-                          percent: 0.4,
-                          progressColor: Color.fromARGB(255, 19, 7, 233),
-                          backgroundColor: Color.fromARGB(255, 125, 137, 238),
-                          circularStrokeCap: CircularStrokeCap.round,
-                          center: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '2,241',
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                'kcal',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Column(
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Container(
+                height: 300,
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 34, 141, 230),
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, top: 20),
+                      child: Row(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 50),
-                            child: Text(
-                              '200',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 05,
-                          ),
-                          Text(
-                            'kcal',
+                          const Text(
+                            'Welcome, User Name',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
                           ),
                           SizedBox(
-                            height: 10,
+                            width: 80,
                           ),
                           Text(
-                            'Remaining',
+                            '27-10 -2023',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30,
-                                color: Colors.white),
+                                color:
+                                    const Color.fromARGB(255, 225, 219, 219)),
                           )
                         ],
-                      )
-                    ],
-                  )
-                ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: CircularPercentIndicator(
+                        radius: 75,
+                        lineWidth: 12,
+                        percent: 0.4,
+                        progressColor: Color.fromARGB(255, 25, 88, 196),
+                        backgroundColor: Color.fromARGB(255, 162, 224, 238),
+                        circularStrokeCap: CircularStrokeCap.round,
+                        center: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '2,241',
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              'Cals Reamaining',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 60),
+                          child: Text(
+                            'Consumed',
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 50,
+                        ),
+                        Text(
+                          'Total',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 70),
+                      child: Row(
+                        children: [
+                          Container(
+                              height: 18,
+                              width: 18,
+                              child: Image.asset('assets/fire.png')),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '0 Cals',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 80,
+                          ),
+                          Container(
+                              height: 18,
+                              width: 18,
+                              child: Image.asset('assets/fire.png')),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            '2241 Cals',
+                            style: TextStyle(color: Colors.white),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(

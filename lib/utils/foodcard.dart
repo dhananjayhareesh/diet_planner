@@ -1,4 +1,4 @@
-import 'package:dietplanner_project/screens/add_food.dart';
+import 'package:dietplanner_project/screens/selected_food.dart';
 import 'package:flutter/material.dart';
 
 class FoodCard extends StatelessWidget {
@@ -9,7 +9,7 @@ class FoodCard extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          height: 100,
+          height: 85,
           child: Card(
             elevation: 4,
             color: const Color.fromARGB(255, 255, 255, 255),
@@ -18,7 +18,7 @@ class FoodCard extends StatelessWidget {
                 SizedBox(
                     height: 100,
                     width: 100,
-                    child: Image.asset('assets/bfast.jpg')),
+                    child: Image.asset('assets/break.jpg')),
                 const SizedBox(
                   width: 80,
                 ),
@@ -49,7 +49,7 @@ class FoodCard extends StatelessWidget {
           height: 20,
         ),
         SizedBox(
-          height: 100,
+          height: 80,
           child: Card(
             elevation: 4,
             color: const Color.fromARGB(255, 255, 255, 255),
@@ -89,7 +89,7 @@ class FoodCard extends StatelessWidget {
           height: 20,
         ),
         SizedBox(
-          height: 100,
+          height: 80,
           child: Card(
             elevation: 4,
             color: const Color.fromARGB(255, 255, 255, 255),
@@ -117,7 +117,7 @@ class FoodCard extends StatelessWidget {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => AddFood(
                                     appBarTitle: 'Snacks',
-                                    appBarColor: Colors.yellow,
+                                    appBarColor: Colors.orange,
                                   )));
                         },
                         child: Image.asset('assets/plus-sign.png')))
@@ -129,7 +129,7 @@ class FoodCard extends StatelessWidget {
           height: 20,
         ),
         SizedBox(
-          height: 100,
+          height: 80,
           child: Card(
             elevation: 4,
             color: const Color.fromARGB(255, 255, 255, 255),
@@ -138,7 +138,7 @@ class FoodCard extends StatelessWidget {
                 SizedBox(
                     height: 100,
                     width: 100,
-                    child: Image.asset('assets/dinner.jpg')),
+                    child: Image.asset('assets/dinnner.avif')),
                 const SizedBox(
                   width: 80,
                 ),
@@ -228,9 +228,10 @@ class FoodCard extends StatelessWidget {
         ),
         SizedBox(
           width: double.infinity,
-          child: Card(
-              elevation: 4,
-              color: Colors.blue[200],
+          child: Container(
+              decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 144, 202, 249),
+                  borderRadius: BorderRadius.all(Radius.circular(50))),
               child: Column(
                 children: [
                   const Padding(
@@ -257,9 +258,9 @@ class FoodCard extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 200,
-                    height: 40,
+                    height: 45,
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 5),
+                      padding: const EdgeInsets.only(bottom: 10),
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor:

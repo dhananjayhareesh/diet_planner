@@ -107,7 +107,7 @@ class ScreenUserDetails extends StatelessWidget {
                             width: 130,
                             child: TextField(
                               decoration: InputDecoration(
-                                labelText: "Age",
+                                labelText: "Sex",
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   borderSide:
