@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class ScreenSplashThree extends StatelessWidget {
   const ScreenSplashThree({super.key});
@@ -6,29 +7,27 @@ class ScreenSplashThree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.height / 2,
-          color: const Color.fromARGB(248, 248, 248, 255),
-          width: double.infinity,
-          child: const Center(
-            child: Text(
-              "WE WILL HELP YOU TO\nMAINTAIN A GOOD BODY",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-            ),
+      backgroundColor: Colors.blue[100],
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset('assets/Animation - 1698382679000.json'),
+          SizedBox(
+            height: 50,
           ),
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height / 2,
-          width: double.infinity,
-          child: Image.asset(
-            'assets/splashthree.png',
-            fit: BoxFit.fill,
+          Text(
+            "Create and save your own recipes.",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
-        )
-      ],
-    ));
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            'Keep your favorite dishes just a tap away.',
+            style: TextStyle(fontSize: 18),
+          )
+        ],
+      ),
+    );
   }
 }

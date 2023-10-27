@@ -1,4 +1,6 @@
+import 'package:dietplanner_project/screens/user_details.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class ScreenSplashFour extends StatelessWidget {
   const ScreenSplashFour({super.key});
@@ -6,37 +8,46 @@ class ScreenSplashFour extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[100],
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height / 2,
-            color: const Color.fromARGB(248, 248, 248, 255),
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'HAPPY DIET.',
-                  style: TextStyle(fontSize: 40),
-                ),
-                Text(
-                  'Good Diet, Good Life',
-                  style: TextStyle(
-                      color: const Color.fromARGB(255, 117, 116, 116)),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text("Let's Start The Healthy Journey")
-              ],
-            ),
+          Lottie.asset('assets/Animation - 1698384804398.json'),
+          SizedBox(
+            height: 50,
+          ),
+          Text(
+            "Start your journey to better health through a well-balanced, healthy diet.",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            "Let's get started!",
+            style: TextStyle(fontSize: 30),
+          ),
+          SizedBox(
+            height: 50,
           ),
           Container(
-            height: MediaQuery.of(context).size.height / 2,
-            width: double.infinity,
-            child: Image.asset(
-              'assets/splashfour.png',
-              fit: BoxFit.fill,
+            height: 40,
+            width: 200,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ScreenUserDetails();
+                }));
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 4, 63, 111),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25))),
+              child: const Text(
+                'Continue',
+                style: TextStyle(fontSize: 15),
+              ),
             ),
           ),
         ],

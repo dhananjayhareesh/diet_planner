@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   smooth_page_indicator: ^1.1.0
   percent_indicator: ^4.2.3
+  lottie: ^2.7.0
   
 
 dev_dependencies:
@@ -63,10 +64,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
    assets:
-     - assets/splashone.png
-     - assets/splashtwo.png
-     - assets/splashthree.png
-     - assets/splashfour.png
      - assets/budget.jpg
      - assets/leftar.png
      - assets/rightar.png
@@ -83,6 +80,11 @@ flutter:
      - assets/recipes.png
      - assets/dashboard.png
      - assets/success.png
+     - assets/Animation - 1698382679000.json
+     - assets/Animation - 1698382442951.json
+     - assets/Animation - 1698383959939.json
+     - assets/Animation - 1698384804398.json
+    
    
 
   # An image asset can refer to one or more resolution-specific "variants", see

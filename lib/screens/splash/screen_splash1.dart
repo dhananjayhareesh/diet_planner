@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class ScreenSplashOne extends StatelessWidget {
   const ScreenSplashOne({super.key});
@@ -6,29 +7,27 @@ class ScreenSplashOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.height / 2,
-          color: const Color.fromARGB(248, 248, 248, 255),
-          width: double.infinity,
-          child: const Center(
-            child: Text(
-              "YOU DON'T HAVE TO EAT LESS\nYOU HAVE TO EAT RIGHT",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-            ),
+      backgroundColor: Colors.blue[100],
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset('assets/Animation - 1698383959939.json'),
+          SizedBox(
+            height: 50,
           ),
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height / 2,
-          width: double.infinity,
-          child: Image.asset(
-            'assets/splashone.png',
-            fit: BoxFit.fill,
+          Text(
+            "Welcome to HAPPY DIET!",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
-        )
-      ],
-    ));
+          SizedBox(
+            height: 20,
+          ),
+          Text(
+            'Where a healthier you begins with every meal.',
+            style: TextStyle(fontSize: 18),
+          )
+        ],
+      ),
+    );
   }
 }
