@@ -1,4 +1,4 @@
-import 'package:dietplanner_project/screens/user_details.dart';
+import 'package:dietplanner_project/screens/opening_sceens/user_details.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

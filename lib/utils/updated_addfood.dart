@@ -1,16 +1,18 @@
+import 'package:dietplanner_project/utils/model_food.dart';
 import 'package:flutter/material.dart';
 
-class NewFood extends StatefulWidget {
-  const NewFood({super.key});
+class AddFoodScreen extends StatelessWidget {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController caloriesController = TextEditingController();
+  AddFoodScreen({super.key});
 
-  @override
-  State<NewFood> createState() => _NewFoodState();
-}
-
-class _NewFoodState extends State<NewFood> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Create New Food'),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -53,24 +55,13 @@ class _NewFoodState extends State<NewFood> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
             Container(
               height: 50,
               width: 300,
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: "ex. Chicken Soup",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                ),
+              child: TextFormField(
+                controller: nameController,
+                decoration: const InputDecoration(labelText: "ex.Chicken Soup"),
               ),
-            ),
-            SizedBox(
-              height: 40,
             ),
             SizedBox(
               height: 40,
@@ -86,36 +77,38 @@ class _NewFoodState extends State<NewFood> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
             Container(
-              height: 40,
-              width: 200,
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: "ex. 120 kcal",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                ),
+              height: 50,
+              width: 300,
+              child: TextFormField(
+                controller: caloriesController,
+                decoration: const InputDecoration(labelText: "ex. 120 kcal"),
               ),
             ),
             SizedBox(
-              height: 80,
+              height: 50,
             ),
-            Container(
-              height: 40,
-              width: 150,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 236, 34, 84),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25))),
-                  onPressed: () {},
-                  child: Text('Save')),
-            )
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromARGB(255, 236, 34, 84),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25))),
+              onPressed: () {
+                final name = nameController.text;
+                final calories = int.tryParse(caloriesController.text);
+                if (name.isNotEmpty && calories != null) {
+                  final newFoodItem = FoodItem(name: name, calories: calories);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Food added to list'),
+                    ),
+                  );
+
+                  Navigator.pop(context, newFoodItem);
+                }
+              },
+              child: const Text("Add to food list"),
+            ),
           ],
         ),
       ),

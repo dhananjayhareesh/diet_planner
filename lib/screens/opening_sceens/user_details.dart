@@ -1,4 +1,4 @@
-import 'package:dietplanner_project/screens/calorie_budget.dart';
+import 'package:dietplanner_project/screens/opening_sceens/calorie_budget.dart';
 import 'package:flutter/material.dart';
 
 class ScreenUserDetails extends StatelessWidget {

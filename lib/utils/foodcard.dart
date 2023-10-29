@@ -1,4 +1,4 @@
-import 'package:dietplanner_project/screens/selected_food.dart';
+import 'package:dietplanner_project/utils/selected_food.dart';
 import 'package:flutter/material.dart';
 
 class FoodCard extends StatelessWidget {
@@ -138,7 +138,7 @@ class FoodCard extends StatelessWidget {
                 SizedBox(
                     height: 100,
                     width: 100,
-                    child: Image.asset('assets/dinnner.avif')),
+                    child: Image.asset('assets/dinner.jpg')),
                 const SizedBox(
                   width: 80,
                 ),

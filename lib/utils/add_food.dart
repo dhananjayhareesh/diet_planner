@@ -79,6 +79,31 @@ class _TabFoodState extends State<TabFood> {
                         "${selectedFoodItem.foodItem.name} (Quantity: ${selectedFoodItem.quantity})"),
                     subtitle: Text(
                         "Calories: ${selectedFoodItem.foodItem.calories * selectedFoodItem.quantity} kcal"),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: () {
+                            setState(() {
+                              selectedItems[index].quantity++;
+                            });
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
+                            setState(() {
+                              if (selectedItems[index].quantity > 1) {
+                                selectedItems[index].quantity--;
+                              } else {
+                                selectedItems.removeAt(index);
+                              }
+                            });
+                          },
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
@@ -104,7 +129,7 @@ class _TabFoodState extends State<TabFood> {
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text('Add'),
+                  child: Text('Add to diet'),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 236, 34, 84),
                       shape: RoundedRectangleBorder(

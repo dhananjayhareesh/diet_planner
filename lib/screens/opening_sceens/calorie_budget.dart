@@ -1,4 +1,4 @@
-import 'package:dietplanner_project/screens/main_bottom.dart';
+import 'package:dietplanner_project/screens/bottom_nav_screens/main_bottom.dart';
 import 'package:flutter/material.dart';
 
 class CalorieBudget extends StatelessWidget {
