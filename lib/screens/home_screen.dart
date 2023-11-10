@@ -1,5 +1,8 @@
+import 'package:dietplanner_project/database/db_model.dart';
 import 'package:dietplanner_project/utils/foodcard.dart';
+import 'package:dietplanner_project/utils/user_page.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,6 +13,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late UserModel user;
+
+  @override
+  void initState() {
+    super.initState();
+    // Fetch user data from Hive when the widget initializes
+    user =
+        Hive.box<UserModel>('userBox').get('user', defaultValue: UserModel())!;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(fontWeight: FontWeight.w900, fontSize: 25),
         ),
         leading: IconButton(
-            onPressed: () {}, icon: const Icon(Icons.person_2_rounded)),
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => UserPage()));
+            },
+            icon: const Icon(Icons.person_2_rounded)),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.calendar_month))
         ],
@@ -40,11 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20, top: 20),
+                      padding: EdgeInsets.only(left: 20, top: 20),
                       child: Row(
                         children: [
-                          const Text(
-                            'Welcome, User Name',
+                          Text(
+                            'Welcome, ${user.name}',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -56,8 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             '27-10 -2023',
                             style: TextStyle(
-                                color:
-                                    const Color.fromARGB(255, 225, 219, 219)),
+                                color: Color.fromARGB(255, 225, 219, 219)),
                           )
                         ],
                       ),
@@ -68,14 +84,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         radius: 75,
                         lineWidth: 12,
                         percent: 0.4,
-                        progressColor: Color.fromARGB(255, 25, 88, 196),
-                        backgroundColor: Color.fromARGB(255, 162, 224, 238),
+                        progressColor: const Color.fromARGB(255, 25, 88, 196),
+                        backgroundColor:
+                            const Color.fromARGB(255, 162, 224, 238),
                         circularStrokeCap: CircularStrokeCap.round,
                         center: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '2,241',
+                              user.calorieBudget.toString(),
                               style: TextStyle(
                                   fontSize: 25,
                                   fontWeight: FontWeight.bold,
@@ -94,13 +111,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Row(
+                    const Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 60),
+                          padding: EdgeInsets.symmetric(horizontal: 60),
                           child: Text(
                             'Consumed',
                             style: TextStyle(color: Colors.white, fontSize: 15),
@@ -115,36 +132,36 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 70),
                       child: Row(
                         children: [
-                          Container(
+                          SizedBox(
                               height: 18,
                               width: 18,
                               child: Image.asset('assets/fire.png')),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
-                          Text(
+                          const Text(
                             '0 Cals',
                             style: TextStyle(color: Colors.white),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 80,
                           ),
-                          Container(
+                          SizedBox(
                               height: 18,
                               width: 18,
                               child: Image.asset('assets/fire.png')),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           Text(
-                            '2241 Cals',
+                            user.calorieBudget.toString(),
                             style: TextStyle(color: Colors.white),
                           )
                         ],
@@ -154,8 +171,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(15),
+            const Padding(
+              padding: EdgeInsets.all(15),
               child: FoodCard(),
             )
           ],

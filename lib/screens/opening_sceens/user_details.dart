@@ -1,8 +1,17 @@
+import 'package:dietplanner_project/database/db_model.dart';
 import 'package:dietplanner_project/screens/opening_sceens/calorie_budget.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class ScreenUserDetails extends StatelessWidget {
-  const ScreenUserDetails({super.key});
+  ScreenUserDetails({super.key});
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
+  final TextEditingController sexController = TextEditingController();
+  final TextEditingController weightController = TextEditingController();
+  final TextEditingController heightController = TextEditingController();
+  final TextEditingController targetWeightController = TextEditingController();
+  final Box<UserModel> userBox = Hive.box<UserModel>('userBox');
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +62,7 @@ class ScreenUserDetails extends StatelessWidget {
                         height: 5,
                       ),
                       TextField(
+                        controller: nameController,
                         decoration: InputDecoration(
                           labelText: "Name",
                           border: OutlineInputBorder(
@@ -90,6 +100,7 @@ class ScreenUserDetails extends StatelessWidget {
                           SizedBox(
                             width: 130,
                             child: TextField(
+                              controller: ageController,
                               decoration: InputDecoration(
                                 labelText: "Age",
                                 border: OutlineInputBorder(
@@ -106,6 +117,7 @@ class ScreenUserDetails extends StatelessWidget {
                           SizedBox(
                             width: 130,
                             child: TextField(
+                              controller: sexController,
                               decoration: InputDecoration(
                                 labelText: "Sex",
                                 border: OutlineInputBorder(
@@ -147,6 +159,7 @@ class ScreenUserDetails extends StatelessWidget {
                           SizedBox(
                             width: 130,
                             child: TextField(
+                              controller: weightController,
                               decoration: InputDecoration(
                                 labelText: "Weight",
                                 border: OutlineInputBorder(
@@ -163,6 +176,7 @@ class ScreenUserDetails extends StatelessWidget {
                           SizedBox(
                             width: 130,
                             child: TextField(
+                              controller: heightController,
                               decoration: InputDecoration(
                                 labelText: "Height",
                                 border: OutlineInputBorder(
@@ -192,6 +206,7 @@ class ScreenUserDetails extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 50, right: 50),
                         child: TextField(
+                          controller: targetWeightController,
                           decoration: InputDecoration(
                             labelText: "Target Height",
                             border: OutlineInputBorder(
@@ -210,9 +225,31 @@ class ScreenUserDetails extends StatelessWidget {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {
+                            //save user data to hive
+                            //var userBox = Hive.box('userBox');
+                            var user = UserModel()
+                              ..name = nameController.text
+                              ..age = int.parse(ageController.text)
+                              ..sex = sexController.text
+                              ..height = double.parse(heightController.text)
+                              ..weight = double.parse(weightController.text)
+                              ..targetWeight =
+                                  double.parse(targetWeightController.text);
+
+                            user.calorieBudget = calculateCalorieBudget(
+                                user.weight,
+                                user.height,
+                                user.targetWeight,
+                                user.age,
+                                user.sex);
+
+                            userBox.put('user', user);
+                            print('User data saved to Hive');
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return CalorieBudget();
+                              return CalorieBudget(
+                                user: user,
+                              );
                             }));
                           },
                           style: ElevatedButton.styleFrom(
@@ -235,5 +272,24 @@ class ScreenUserDetails extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  double calculateCalorieBudget(
+      double weight, double height, double targetWeight, int age, String sex) {
+    // Realistic Harris-Benedict Equation for calculating Basal Metabolic Rate (BMR)
+    double bmr;
+    if (sex.toLowerCase() == 'male') {
+      bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+    } else {
+      bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+    }
+
+    // Assuming a moderate activity level
+    double calorieBudget = bmr * 1.55; // Adjust activity factor as needed
+
+    // Round the result to the nearest whole number
+    calorieBudget = calorieBudget.roundToDouble();
+
+    return calorieBudget;
   }
 }

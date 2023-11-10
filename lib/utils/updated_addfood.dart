@@ -2,8 +2,8 @@ import 'package:dietplanner_project/utils/model_food.dart';
 import 'package:flutter/material.dart';
 
 class AddFoodScreen extends StatelessWidget {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController caloriesController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController caloriesController = TextEditingController();
   AddFoodScreen({super.key});
 
   @override
@@ -22,40 +22,40 @@ class AddFoodScreen extends StatelessWidget {
                   child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  color: Color.fromARGB(255, 229, 224, 224),
+                  color: const Color.fromARGB(255, 229, 224, 224),
                 ),
                 height: 100,
                 width: 150,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                         height: 59,
                         width: 59,
                         child: Image.asset('assets/diet.png')),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
-                    Text("Create a food")
+                    const Text("Create a food")
                   ],
                 ),
               )),
             ),
-            SizedBox(
+            const SizedBox(
               height: 90,
             ),
             Container(
               width: double.infinity,
               height: 30,
               color: const Color.fromARGB(255, 229, 224, 224),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Food Name',
                   style: TextStyle(fontSize: 20),
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: 50,
               width: 300,
               child: TextFormField(
@@ -63,21 +63,21 @@ class AddFoodScreen extends StatelessWidget {
                 decoration: const InputDecoration(labelText: "ex.Chicken Soup"),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Container(
               width: double.infinity,
               height: 30,
               color: const Color.fromARGB(255, 229, 224, 224),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Calories',
                   style: TextStyle(fontSize: 20),
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: 50,
               width: 300,
               child: TextFormField(
@@ -85,12 +85,12 @@ class AddFoodScreen extends StatelessWidget {
                 decoration: const InputDecoration(labelText: "ex. 120 kcal"),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 236, 34, 84),
+                  backgroundColor: const Color.fromARGB(255, 236, 34, 84),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25))),
               onPressed: () {
@@ -99,7 +99,7 @@ class AddFoodScreen extends StatelessWidget {
                 if (name.isNotEmpty && calories != null) {
                   final newFoodItem = FoodItem(name: name, calories: calories);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text('Food added to list'),
                     ),
                   );

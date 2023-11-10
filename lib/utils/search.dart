@@ -22,19 +22,19 @@ class _SearchFoodState extends State<SearchFood> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[300],
-        title: Text('Select Your Food'),
+        title: const Text('Select Your Food'),
         centerTitle: true,
       ),
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.all(20),
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               color: Colors.grey[200],
               borderRadius: BorderRadius.circular(30.0),
             ),
-            child: Row(
+            child: const Row(
               children: [
                 Icon(Icons.search),
                 SizedBox(width: 10),
@@ -63,7 +63,7 @@ class _SearchFoodState extends State<SearchFood> {
                         onTap: () {
                           Navigator.pop(context, foodItem);
                         },
-                        child: Icon(Icons.add),
+                        child: const Icon(Icons.add),
                       ),
                     ],
                   ),
@@ -74,7 +74,7 @@ class _SearchFoodState extends State<SearchFood> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 236, 34, 84),
+                backgroundColor: const Color.fromARGB(255, 236, 34, 84),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25))),
             onPressed: () {
@@ -91,7 +91,7 @@ class _SearchFoodState extends State<SearchFood> {
                 }
               });
             },
-            child: Text("Create New Food"),
+            child: const Text("Create New Food"),
           ),
         ],
       ),

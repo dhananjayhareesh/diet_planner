@@ -1,8 +1,10 @@
+import 'package:dietplanner_project/database/db_model.dart';
 import 'package:dietplanner_project/screens/bottom_nav_screens/main_bottom.dart';
 import 'package:flutter/material.dart';
 
 class CalorieBudget extends StatelessWidget {
-  const CalorieBudget({super.key});
+  final UserModel user;
+  const CalorieBudget({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,28 +22,28 @@ class CalorieBudget extends StatelessWidget {
                     child: Image.asset('assets/budget.jpg')),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
-            Text(
+            const Text(
               'Your plan is ready!!',
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               'Daily food calorie budget',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
-              '2,241',
+              user.calorieBudget.toString(),
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
             ),
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
             SizedBox(
@@ -50,7 +52,7 @@ class CalorieBudget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return MainBottom();
+                    return const MainBottom();
                   }));
                 },
                 style: ElevatedButton.styleFrom(
