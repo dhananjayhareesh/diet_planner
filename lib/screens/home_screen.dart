@@ -4,6 +4,7 @@ import 'package:dietplanner_project/utils/user_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -71,9 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 80,
                           ),
                           Text(
-                            '27-10 -2023',
+                            DateFormat('dd-MM-yyyy').format(DateTime.now()),
                             style: TextStyle(
-                                color: Color.fromARGB(255, 225, 219, 219)),
+                              color: Color.fromARGB(255, 251, 249, 249),
+                            ),
                           )
                         ],
                       ),
@@ -83,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: CircularPercentIndicator(
                         radius: 75,
                         lineWidth: 12,
-                        percent: 0.4,
+                        percent: 0.6,
                         progressColor: const Color.fromARGB(255, 25, 88, 196),
                         backgroundColor:
                             const Color.fromARGB(255, 162, 224, 238),

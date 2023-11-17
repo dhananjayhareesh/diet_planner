@@ -23,7 +23,7 @@ class UserModel extends HiveObject {
   late double targetWeight;
 
   @HiveField(6)
-  late double calorieBudget;
+  late double? calorieBudget;
 
   UserModel({
     this.name = '',

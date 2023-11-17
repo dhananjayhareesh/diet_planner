@@ -1,4 +1,7 @@
 import 'package:dietplanner_project/database/db_model.dart';
+import 'package:dietplanner_project/database/model_food.dart';
+import 'package:dietplanner_project/database/model_selected_food.dart';
+import 'package:dietplanner_project/database/model_totalcalories.dart';
 import 'package:dietplanner_project/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -6,7 +9,13 @@ import 'package:hive_flutter/adapters.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
+  Hive.registerAdapter(FoodItemAdapter());
+  Hive.registerAdapter(SelectedFoodItemAdapter());
+  Hive.registerAdapter(TotalCaloriesAdapter());
   await Hive.openBox<UserModel>('userBox');
+  await Hive.openBox<FoodItem>('foodBox');
+  await Hive.openBox<TotalCalories>('totalCaloriesBox');
+  await Hive.openBox<SelectedFoodItem>('selectedFoodBox');
   runApp(MyApp());
 }
 

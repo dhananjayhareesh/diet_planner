@@ -43,6 +43,9 @@ dependencies:
   hive_flutter: ^1.1.0
   path_provider: ^2.1.1
   hive_generator: ^2.0.1
+  fl_chart: ^0.60.0
+  intl: ^0.18.1
+
   
 
   
@@ -100,6 +103,7 @@ flutter:
      - assets/dinnner.avif
      - assets/diet.png
      - assets/user.png
+     - assets/userbackg.jpg
     
    
 

@@ -1,4 +1,4 @@
-import 'package:dietplanner_project/utils/model_food.dart';
+import 'package:dietplanner_project/database/model_food.dart';
 import 'package:flutter/material.dart';
 
 class AddFoodScreen extends StatelessWidget {
