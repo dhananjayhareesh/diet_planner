@@ -26,7 +26,7 @@ class _UserPageState extends State<UserPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 240, 227, 227),
       appBar: AppBar(
-        backgroundColor: Colors.blue[200],
+        backgroundColor: Colors.indigo,
         title: const Text('Profile'),
         centerTitle: true,
       ),
@@ -37,41 +37,45 @@ class _UserPageState extends State<UserPage> {
             children: [
               Container(
                 width: double.infinity,
-                height: 100,
+                height: 130,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
+                  color: Colors.blue[100],
                 ),
                 child: Row(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 30),
-                      child: SizedBox(
-                          height: 80,
-                          width: 80,
-                          child: Image.asset('assets/user.png')),
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundImage: AssetImage('assets/user.png'),
+                      ),
                     ),
                     const SizedBox(
                       width: 20,
                     ),
                     Expanded(
-                        child: Tooltip(
-                      message: user?.name ?? 'N/A',
-                      child: Text(
-                        user?.name.toUpperCase() ?? 'N/A',
-                        style: TextStyle(fontSize: 25),
-                        overflow: TextOverflow.ellipsis,
+                      child: Tooltip(
+                        message: user?.name ?? 'N/A',
+                        child: Text(
+                          user?.name.toUpperCase() ?? 'N/A',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                    ))
+                    ),
                   ],
                 ),
               ),
               const SizedBox(
-                height: 40,
+                height: 20,
               ),
               const Text(
                 'Details',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 20,
@@ -86,108 +90,21 @@ class _UserPageState extends State<UserPage> {
                   padding: EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            'Name',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Spacer(),
-                          Text(user?.name ?? 'N/A')
-                        ],
-                      ),
-                      Divider(
-                        thickness: 1.5,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Age',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Spacer(),
-                          Text(user?.age.toString() ?? 'N/A')
-                        ],
-                      ),
-                      Divider(
-                        thickness: 1.5,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Sex',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Spacer(),
-                          Text(user?.sex ?? 'N/A')
-                        ],
-                      ),
-                      Divider(
-                        thickness: 1.5,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Weight',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Spacer(),
-                          Text(user?.weight.toString() ?? 'N/A')
-                        ],
-                      ),
-                      Divider(
-                        thickness: 1.5,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Height',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Spacer(),
-                          Text(user?.height.toString() ?? 'N/A')
-                        ],
-                      ),
-                      Divider(
-                        thickness: 1.5,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            'Target Weight',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Spacer(),
-                          Text(user?.targetWeight.toString() ?? 'N/A')
-                        ],
-                      ),
-                      Divider(
-                        thickness: 1.5,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
+                      buildDetailRow('Name', user?.name ?? 'N/A'),
+                      buildDetailRow('Age', user?.age.toString() ?? 'N/A'),
+                      buildDetailRow('Sex', user?.sex ?? 'N/A'),
+                      buildDetailRow(
+                          'Weight', user?.weight.toString() ?? 'N/A'),
+                      buildDetailRow(
+                          'Height', user?.height.toString() ?? 'N/A'),
+                      buildDetailRow('Target Weight',
+                          user?.targetWeight.toString() ?? 'N/A'),
                     ],
                   ),
                 ),
               ),
               const SizedBox(
-                height: 40,
+                height: 30,
               ),
               ElevatedButton(
                 onPressed: () async {
@@ -205,17 +122,47 @@ class _UserPageState extends State<UserPage> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 152, 160, 235),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                  backgroundColor: Colors.indigo,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),
                   ),
                 ),
-                child: const Text('Edit Details'),
+                child: const Text(
+                  'Edit Details',
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildDetailRow(String title, String value) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              title,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Spacer(),
+            Text(
+              value,
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
+        Divider(
+          thickness: 1.5,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+      ],
     );
   }
 }

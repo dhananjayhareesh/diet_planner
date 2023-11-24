@@ -7,26 +7,30 @@ class ScreenSplashOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[100],
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Lottie.asset('assets/Animation - 1698383959939.json'),
-          SizedBox(
-            height: 50,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.green[100]!, Colors.blue[200]!],
           ),
-          Text(
-            "Welcome to HAPPY DIET!",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            'Where a healthier you begins with every meal.',
-            style: TextStyle(fontSize: 18),
-          )
-        ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset('assets/Animation - 1698383959939.json'),
+            SizedBox(height: 50),
+            Text(
+              "Welcome to HAPPY DIET!",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Where a healthier you begins with every meal.',
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
       ),
     );
   }

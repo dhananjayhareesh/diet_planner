@@ -45,6 +45,9 @@ dependencies:
   hive_generator: ^2.0.1
   fl_chart: ^0.60.0
   intl: ^0.18.1
+  image_picker: ^1.0.4
+  
+  
 
   
 
@@ -104,6 +107,17 @@ flutter:
      - assets/diet.png
      - assets/user.png
      - assets/userbackg.jpg
+     - assets/recipebreak.jpg
+     - assets/recipedinner.jpg
+     - assets/recipelunch.jpg
+     - assets/favorites.png
+     - assets/bmi.avif
+     - assets/backguser.jpg
+     - assets/userbg.jpg
+     - assets/brkrecipe1.webp
+     - assets/deleterecipie.png
+     - assets/favfood.png
+
     
    
 

@@ -7,26 +7,30 @@ class ScreenSplashThree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[100],
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Lottie.asset('assets/Animation - 1698382679000.json'),
-          SizedBox(
-            height: 50,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.green[100]!, Colors.blue[200]!],
           ),
-          Text(
-            "Create and save your own recipes.",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            'Keep your favorite dishes just a tap away.',
-            style: TextStyle(fontSize: 18),
-          )
-        ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset('assets/Animation - 1698382679000.json'),
+            SizedBox(height: 50),
+            Text(
+              "Create and save your own recipes.",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Keep your favorite dishes just a tap away.',
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
       ),
     );
   }

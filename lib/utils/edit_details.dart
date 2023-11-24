@@ -51,7 +51,8 @@ class _EditDetailsState extends State<EditDetails> {
       appBar: AppBar(
         title: Text('Edit Details'),
         centerTitle: true,
-        backgroundColor: Colors.blue[200],
+        backgroundColor: Colors.indigo,
+        elevation: 0, // No shadow
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -60,124 +61,53 @@ class _EditDetailsState extends State<EditDetails> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: TextFormField(
-                    controller: nameController,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: 'Name',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: TextFormField(
-                    controller: ageController,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: 'Age',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: TextFormField(
-                    controller: sexController,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: 'Sex',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: TextFormField(
-                    controller: weightController,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: 'Weight',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: TextFormField(
-                    controller: heightController,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: 'Height',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: TextFormField(
-                    controller: targetWeightController,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      labelText: 'Target Weight',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      final updatedUser = UserModel(
-                        name: nameController.text,
-                        age: int.tryParse(ageController.text) ?? 0,
-                        sex: sexController.text,
-                        weight: double.tryParse(weightController.text) ?? 0.0,
-                        height: double.tryParse(heightController.text) ?? 0.0,
-                        targetWeight:
-                            double.tryParse(targetWeightController.text) ?? 0.0,
-                      );
+                buildTextField('Name', nameController),
+                buildTextField('Age', ageController, TextInputType.number),
+                buildTextField('Sex', sexController),
+                buildTextField(
+                    'Weight', weightController, TextInputType.number),
+                buildTextField(
+                    'Height', heightController, TextInputType.number),
+                buildTextField('Target Weight', targetWeightController,
+                    TextInputType.number),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    final updatedUser = UserModel(
+                      name: nameController.text,
+                      age: int.tryParse(ageController.text) ?? 0,
+                      sex: sexController.text,
+                      weight: double.tryParse(weightController.text) ?? 0.0,
+                      height: double.tryParse(heightController.text) ?? 0.0,
+                      targetWeight:
+                          double.tryParse(targetWeightController.text) ?? 0.0,
+                    );
 
-                      // Recalculate calorie budget
-                      updatedUser.calorieBudget = calculateCalorieBudget(
-                        updatedUser.weight,
-                        updatedUser.height,
-                        updatedUser.targetWeight,
-                        updatedUser.age,
-                        updatedUser.sex,
-                      );
+                    // Recalculate calorie budget
+                    updatedUser.calorieBudget = calculateCalorieBudget(
+                      updatedUser.weight,
+                      updatedUser.height,
+                      updatedUser.targetWeight,
+                      updatedUser.age,
+                      updatedUser.sex,
+                    );
 
-                      // Update user details in Hive
-                      final userBox = Hive.box<UserModel>('userBox');
-                      userBox.put('user', updatedUser);
+                    // Update user details in Hive
+                    final userBox = Hive.box<UserModel>('userBox');
+                    userBox.put('user', updatedUser);
 
-                      Navigator.of(context).pop(updatedUser);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 152, 160, 235),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
+                    Navigator.of(context).pop(updatedUser);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    primary: Colors.indigo,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
                     ),
-                    child: Text('Save'),
+                  ),
+                  child: Text(
+                    'Save',
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
               ],
@@ -187,15 +117,34 @@ class _EditDetailsState extends State<EditDetails> {
       ),
     );
   }
+
+  Widget buildTextField(String label, TextEditingController controller,
+      [TextInputType? keyboardType]) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextFormField(
+        controller: controller,
+        style: TextStyle(color: Colors.black),
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: TextStyle(color: Colors.indigo),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.indigo, width: 2.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 double calculateCalorieBudget(
-  double weight,
-  double height,
-  double targetWeight,
-  int age,
-  String sex,
-) {
+    double weight, double height, double targetWeight, int age, String sex) {
   double bmr;
   if (sex.toLowerCase() == 'male') {
     bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
@@ -204,7 +153,6 @@ double calculateCalorieBudget(
   }
 
   double calorieBudget = bmr * 1.55;
-
   calorieBudget = calorieBudget.roundToDouble();
 
   return calorieBudget;
