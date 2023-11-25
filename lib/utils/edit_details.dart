@@ -48,69 +48,79 @@ class _EditDetailsState extends State<EditDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[200],
       appBar: AppBar(
         title: Text('Edit Details'),
         centerTitle: true,
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.indigo[400],
         elevation: 0, // No shadow
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                buildTextField('Name', nameController),
-                buildTextField('Age', ageController, TextInputType.number),
-                buildTextField('Sex', sexController),
-                buildTextField(
-                    'Weight', weightController, TextInputType.number),
-                buildTextField(
-                    'Height', heightController, TextInputType.number),
-                buildTextField('Target Weight', targetWeightController,
-                    TextInputType.number),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    final updatedUser = UserModel(
-                      name: nameController.text,
-                      age: int.tryParse(ageController.text) ?? 0,
-                      sex: sexController.text,
-                      weight: double.tryParse(weightController.text) ?? 0.0,
-                      height: double.tryParse(heightController.text) ?? 0.0,
-                      targetWeight:
-                          double.tryParse(targetWeightController.text) ?? 0.0,
-                    );
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.deepPurple[100]!, Colors.blue[200]!],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Form(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  buildTextField('Name', nameController),
+                  buildTextField('Age', ageController, TextInputType.number),
+                  buildTextField('Sex', sexController),
+                  buildTextField(
+                      'Weight', weightController, TextInputType.number),
+                  buildTextField(
+                      'Height', heightController, TextInputType.number),
+                  buildTextField('Target Weight', targetWeightController,
+                      TextInputType.number),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      final updatedUser = UserModel(
+                        name: nameController.text,
+                        age: int.tryParse(ageController.text) ?? 0,
+                        sex: sexController.text,
+                        weight: double.tryParse(weightController.text) ?? 0.0,
+                        height: double.tryParse(heightController.text) ?? 0.0,
+                        targetWeight:
+                            double.tryParse(targetWeightController.text) ?? 0.0,
+                      );
 
-                    // Recalculate calorie budget
-                    updatedUser.calorieBudget = calculateCalorieBudget(
-                      updatedUser.weight,
-                      updatedUser.height,
-                      updatedUser.targetWeight,
-                      updatedUser.age,
-                      updatedUser.sex,
-                    );
+                      // Recalculate calorie budget
+                      updatedUser.calorieBudget = calculateCalorieBudget(
+                        updatedUser.weight,
+                        updatedUser.height,
+                        updatedUser.targetWeight,
+                        updatedUser.age,
+                        updatedUser.sex,
+                      );
 
-                    // Update user details in Hive
-                    final userBox = Hive.box<UserModel>('userBox');
-                    userBox.put('user', updatedUser);
+                      // Update user details in Hive
+                      final userBox = Hive.box<UserModel>('userBox');
+                      userBox.put('user', updatedUser);
 
-                    Navigator.of(context).pop(updatedUser);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    primary: Colors.indigo,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                      Navigator.of(context).pop(updatedUser);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      primary: Colors.indigo,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                    child: Text(
+                      'Save',
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
-                  child: Text(
-                    'Save',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

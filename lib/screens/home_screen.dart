@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             icon: const Icon(Icons.person_2_rounded)),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.calendar_month))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
         ],
       ),
       body: SingleChildScrollView(
