@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 5,
                             ),
                             Text(
-                              'Cals Reamaining',
+                              'Cal Reamaining',
                               style: TextStyle(
                                 color: Colors.white,
                               ),

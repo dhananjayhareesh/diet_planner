@@ -115,12 +115,32 @@ class _TabFoodState extends State<TabFood> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: ListTile(
-                      title: Text(
-                        "${selectedFoodItem.foodItem.name}",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      title: Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Text(
+                          "${selectedFoodItem.foodItem.name}",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      subtitle: Text(
-                        "Calories: ${selectedFoodItem.foodItem.calories * selectedFoodItem.quantity} kcal",
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Text(
+                              "Calories: ${selectedFoodItem.foodItem.calories * selectedFoodItem.quantity} kcal",
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "Quantity: ${selectedFoodItem.quantity}",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue),
+                          ),
+                        ],
                       ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -184,8 +204,7 @@ class _TabFoodState extends State<TabFood> {
             SizedBox(height: 20),
             Text(
               "Today's Total Calories: ${calculateTotalCalories()} kcal",
-              style: TextStyle(
-                  fontSize: 15, color: const Color.fromARGB(255, 169, 41, 32)),
+              style: TextStyle(fontSize: 15, color: Colors.red[900]),
             ),
           ],
         ),
