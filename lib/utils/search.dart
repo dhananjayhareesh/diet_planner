@@ -180,9 +180,11 @@ class _SearchFoodState extends State<SearchFood> {
                     onChanged: (value) {
                       filterFoodItems(value);
                     },
+                    style: TextStyle(fontSize: 16),
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Search your food",
+                      hintStyle: TextStyle(fontSize: 16),
                     ),
                   ),
                 ),
@@ -194,34 +196,58 @@ class _SearchFoodState extends State<SearchFood> {
                 ? Center(
                     child: Text(
                       "No food items found, please create new food",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 18, color: Colors.grey),
                     ),
                   )
-                : ListView.builder(
-                    itemCount: filteredFoodItems.length,
-                    itemBuilder: (context, index) {
-                      final foodItem = filteredFoodItems[index];
-                      return ListTile(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(foodItem.name),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context, foodItem);
-                              },
-                              child: const Icon(Icons.add),
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: ListView.separated(
+                      padding: EdgeInsets.all(8),
+                      itemCount: filteredFoodItems.length,
+                      separatorBuilder: (context, index) => Divider(),
+                      itemBuilder: (context, index) {
+                        final foodItem = filteredFoodItems[index];
+                        return Card(
+                          elevation: 3,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: ListTile(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  foodItem.name,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.pop(context, foodItem);
+                                  },
+                                  child: Icon(
+                                    Icons.add,
+                                    color: Colors.green[700],
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        subtitle: Text("Calories: ${foodItem.calories} kcal"),
-                      );
-                    },
+                            subtitle: Text(
+                              "Calories: ${foodItem.calories} kcal",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
           ),
+          SizedBox(height: 20),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 236, 34, 84),
+              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 30),
+              primary: Color.fromARGB(255, 236, 34, 84),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25),
               ),
@@ -244,8 +270,12 @@ class _SearchFoodState extends State<SearchFood> {
                 });
               }
             },
-            child: const Text("Create New Food"),
+            child: Text(
+              "Create New Food",
+              style: TextStyle(fontSize: 16),
+            ),
           ),
+          SizedBox(height: 20),
         ],
       ),
     );

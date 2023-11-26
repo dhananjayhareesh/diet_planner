@@ -1,6 +1,6 @@
 import 'package:dietplanner_project/screens/recipes/breakfast/break_recipe.dart';
 import 'package:dietplanner_project/screens/recipes/dinner/dinner_recipe.dart';
-import 'package:dietplanner_project/screens/recipes/fav_recipe.dart';
+
 import 'package:dietplanner_project/screens/recipes/lunch/lunch_recipe.dart';
 
 import 'package:flutter/material.dart';

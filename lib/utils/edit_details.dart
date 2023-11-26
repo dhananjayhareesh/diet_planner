@@ -48,7 +48,7 @@ class _EditDetailsState extends State<EditDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[200],
+      backgroundColor: Colors.blue[100],
       appBar: AppBar(
         title: Text('Edit Details'),
         centerTitle: true,
@@ -60,7 +60,7 @@ class _EditDetailsState extends State<EditDetails> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.deepPurple[100]!, Colors.blue[200]!],
+            colors: [Colors.deepPurple[100]!, Colors.blue[100]!],
           ),
         ),
         child: Padding(

@@ -4,114 +4,130 @@ import 'package:flutter/material.dart';
 class AddFoodScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController caloriesController = TextEditingController();
-  AddFoodScreen({super.key});
+
+  AddFoodScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create New Food'),
+        backgroundColor: Colors.blue[200],
+        title: Text('Create New Food'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Center(
-                  child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: const Color.fromARGB(255, 229, 224, 224),
-                ),
-                height: 100,
-                width: 150,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                        height: 59,
-                        width: 59,
-                        child: Image.asset('assets/diet.png')),
-                    const SizedBox(
-                      height: 5,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 3,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3),
                     ),
-                    const Text("Create a food")
                   ],
                 ),
-              )),
-            ),
-            const SizedBox(
-              height: 90,
-            ),
-            Container(
-              width: double.infinity,
-              height: 30,
-              color: const Color.fromARGB(255, 229, 224, 224),
-              child: const Center(
-                child: Text(
-                  'Food Name',
-                  style: TextStyle(fontSize: 20),
+                height: 150,
+                width: 150,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset('assets/diet.png', fit: BoxFit.cover),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 50,
-              width: 300,
-              child: TextFormField(
-                controller: nameController,
-                decoration: const InputDecoration(labelText: "ex.Chicken Soup"),
-              ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Container(
-              width: double.infinity,
-              height: 30,
-              color: const Color.fromARGB(255, 229, 224, 224),
-              child: const Center(
-                child: Text(
-                  'Calories',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 50,
-              width: 300,
-              child: TextFormField(
-                controller: caloriesController,
-                decoration: const InputDecoration(labelText: "ex. 120 kcal"),
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 236, 34, 84),
+              const SizedBox(height: 20),
+              _buildInputField('Food Name', nameController, 'ex. Chicken Soup',
+                  Icons.fastfood),
+              const SizedBox(height: 10),
+              _buildInputField('Calories', caloriesController, 'ex. 120 kcal',
+                  Icons.fitness_center),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green, // Change color as needed
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25))),
-              onPressed: () {
-                final name = nameController.text;
-                final calories = int.tryParse(caloriesController.text);
-                if (name.isNotEmpty && calories != null) {
-                  final newFoodItem = FoodItem(name: name, calories: calories);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Food added to list'),
-                    ),
-                  );
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                onPressed: () {
+                  _onAddButtonPressed(context);
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(12.0),
+                  child: Text(
+                    "Add to Food List",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-                  Navigator.pop(context, newFoodItem);
-                }
-              },
-              child: const Text("Add to food list"),
+  Widget _buildInputField(String label, TextEditingController controller,
+      String hint, IconData icon) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      width: double.infinity,
+      height: 60,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: Colors.blue, // Change color as needed
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: TextFormField(
+                controller: controller,
+                decoration: InputDecoration(
+                  labelText: label,
+                  hintText: hint,
+                  border: InputBorder.none,
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _onAddButtonPressed(BuildContext context) {
+    final name = nameController.text;
+    final calories = int.tryParse(caloriesController.text);
+
+    if (name.isNotEmpty && calories != null) {
+      final newFoodItem = FoodItem(name: name, calories: calories);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Food added to list'),
+        ),
+      );
+
+      Navigator.pop(context, newFoodItem);
+    }
   }
 }
