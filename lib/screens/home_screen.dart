@@ -68,14 +68,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18),
                           ),
-                          SizedBox(
-                            width: 80,
-                          ),
+                          Spacer(),
                           Text(
                             DateFormat('dd-MM-yyyy').format(DateTime.now()),
                             style: TextStyle(
                               color: Color.fromARGB(255, 251, 249, 249),
                             ),
+                          ),
+                          SizedBox(
+                            width: 20,
                           )
                         ],
                       ),
