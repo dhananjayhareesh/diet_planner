@@ -117,23 +117,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 60),
-                          child: Text(
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 70),
+                      child: const Row(
+                        children: [
+                          Text(
                             'Consumed',
                             style: TextStyle(color: Colors.white, fontSize: 15),
                           ),
-                        ),
-                        SizedBox(
-                          width: 50,
-                        ),
-                        Text(
-                          'Total',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        )
-                      ],
+                          Spacer(),
+                          Text(
+                            'Total',
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          )
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -153,9 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             '0 Cals',
                             style: TextStyle(color: Colors.white),
                           ),
-                          const SizedBox(
-                            width: 80,
-                          ),
+                          Spacer(),
                           SizedBox(
                               height: 18,
                               width: 18,
