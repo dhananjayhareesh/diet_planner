@@ -18,7 +18,6 @@ class _TabFoodState extends State<TabFood> {
   late Box<TotalCalories> totalCaloriesBox;
 
   List<SelectedFoodItem> selectedItems = [];
-  int totalCalories = 0;
 
   @override
   void initState() {
@@ -29,20 +28,10 @@ class _TabFoodState extends State<TabFood> {
 
     // Retrieve existing selected items from the Hive box
     selectedItems = selectedFoodBox.values.toList();
-
-    // Retrieve total calories from the Hive box
-    totalCalories = totalCaloriesBox
-            .get('totalCalories', defaultValue: TotalCalories(0))
-            ?.total ??
-        0;
   }
 
   @override
   void dispose() {
-    // Close Hive boxes
-    //foodBox.close();
-    //selectedFoodBox.close();
-    //totalCaloriesBox.close();
     super.dispose();
   }
 
@@ -63,8 +52,9 @@ class _TabFoodState extends State<TabFood> {
     );
 
     // Recalculate and save total calories
-    totalCalories = calculateTotalCalories();
+    int totalCalories = calculateTotalCalories();
     totalCaloriesBox.put('totalCalories', TotalCalories(totalCalories));
+    print('Total Calories stored in Hive: $totalCalories');
   }
 
   void updateItemQuantity(FoodItem item) {
@@ -89,6 +79,15 @@ class _TabFoodState extends State<TabFood> {
     return totalCalories;
   }
 
+  // Modified method to handle "Add to diet" button click
+  void addToDietClicked() {
+    // Save the total calories to Hive only when the button is clicked
+    totalCaloriesBox.put(
+        'totalCalories', TotalCalories(calculateTotalCalories()));
+    print('Total Calories stored in Hive: ${calculateTotalCalories()}');
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +97,7 @@ class _TabFoodState extends State<TabFood> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "History of added food item's",
+              "History of added food items",
               style: TextStyle(fontSize: 20),
             ),
             SizedBox(
@@ -190,7 +189,7 @@ class _TabFoodState extends State<TabFood> {
             Align(
               alignment: Alignment.centerLeft,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: addToDietClicked, // Call the modified method
                 child: Text('Add to diet'),
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(16),

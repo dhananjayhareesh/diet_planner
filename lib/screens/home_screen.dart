@@ -1,4 +1,5 @@
 import 'package:dietplanner_project/database/db_model.dart';
+import 'package:dietplanner_project/database/model_totalcalories.dart';
 import 'package:dietplanner_project/utils/foodcard.dart';
 import 'package:dietplanner_project/utils/user_page.dart';
 import 'package:flutter/material.dart';
@@ -15,17 +16,55 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late UserModel user;
+  late Box<TotalCalories> totalCaloriesBox;
+  late int totalCalories; // Add a variable to store the total calories
 
   @override
   void initState() {
     super.initState();
-    // Fetch user data from Hive when the widget initializes
     user =
         Hive.box<UserModel>('userBox').get('user', defaultValue: UserModel())!;
+    totalCaloriesBox = Hive.box<TotalCalories>('totalCaloriesBox');
+
+    // Initialize total calories
+    totalCalories = totalCaloriesBox
+            .get('totalCalories', defaultValue: TotalCalories(0))
+            ?.total ??
+        0;
+
+    // Add a listener to the Hive box to update total calories when it changes
+    totalCaloriesBox.listenable().addListener(_onTotalCaloriesChanged);
+  }
+
+  // Callback function for total calories changes
+  void _onTotalCaloriesChanged() {
+    // Retrieve and update total calories
+    setState(() {
+      totalCalories = totalCaloriesBox
+              .get('totalCalories', defaultValue: TotalCalories(0))
+              ?.total ??
+          0;
+    });
+  }
+
+  @override
+  void dispose() {
+    // Remove the listener when the widget is disposed
+    totalCaloriesBox.listenable().removeListener(_onTotalCaloriesChanged);
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve total calories from Hive
+    totalCalories = totalCaloriesBox
+            .get('totalCalories', defaultValue: TotalCalories(0))
+            ?.total ??
+        0;
+
+    print(
+        'Total Calories from Hive: $totalCalories'); // Print total calories for debugging
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -36,11 +75,12 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(fontWeight: FontWeight.w900, fontSize: 25),
         ),
         leading: IconButton(
-            onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => UserPage()));
-            },
-            icon: const Icon(Icons.person_2_rounded)),
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => UserPage()));
+          },
+          icon: const Icon(Icons.person_2_rounded),
+        ),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
         ],
@@ -53,8 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 height: 300,
                 decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 34, 141, 230),
-                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                  color: Color.fromARGB(255, 34, 141, 230),
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                ),
                 child: Column(
                   children: [
                     Padding(
@@ -64,9 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             'Welcome, ${user.name}',
                             style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
                           ),
                           Spacer(),
                           Text(
@@ -86,7 +128,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: CircularPercentIndicator(
                         radius: 75,
                         lineWidth: 12,
-                        percent: 0.6,
+                        percent: (((user.calorieBudget ?? 0) - totalCalories) /
+                                (user.calorieBudget ?? 1))
+                            .clamp(0.0,
+                                1.0), // Clamp the percentage between 0 and 1 // Calculate the percentage
                         progressColor: const Color.fromARGB(255, 25, 88, 196),
                         backgroundColor:
                             const Color.fromARGB(255, 162, 224, 238),
@@ -95,17 +140,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              user.calorieBudget.toString(),
+                              (((user.calorieBudget ?? 0) - totalCalories) < 0
+                                      ? 0
+                                      : (user.calorieBudget ?? 0) -
+                                          totalCalories)
+                                  .toStringAsFixed(0),
+                              // Display remaining calories
                               style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
                             ),
                             SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Cal Reamaining',
+                              'Cal Remaining',
                               style: TextStyle(
                                 color: Colors.white,
                               ),
@@ -141,28 +192,30 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Row(
                         children: [
                           SizedBox(
-                              height: 18,
-                              width: 18,
-                              child: Image.asset('assets/fire.png')),
+                            height: 18,
+                            width: 18,
+                            child: Image.asset('assets/fire.png'),
+                          ),
                           const SizedBox(
                             width: 5,
                           ),
-                          const Text(
-                            '0 Cals',
+                          Text(
+                            '$totalCalories Cals', // Updated line
                             style: TextStyle(color: Colors.white),
                           ),
                           Spacer(),
                           SizedBox(
-                              height: 18,
-                              width: 18,
-                              child: Image.asset('assets/fire.png')),
+                            height: 18,
+                            width: 18,
+                            child: Image.asset('assets/fire.png'),
+                          ),
                           const SizedBox(
                             width: 5,
                           ),
                           Text(
                             user.calorieBudget.toString(),
                             style: TextStyle(color: Colors.white),
-                          )
+                          ),
                         ],
                       ),
                     )
