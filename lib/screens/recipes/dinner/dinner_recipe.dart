@@ -18,7 +18,7 @@ class _DinnerRecipeState extends State<DinnerRecipe> {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Dinner Recipes'),
-        backgroundColor: Colors.blue[200],
+        backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         centerTitle: true,
       ),
       body: Container(
@@ -26,7 +26,7 @@ class _DinnerRecipeState extends State<DinnerRecipe> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.deepPurple[100]!, Colors.blue[200]!],
+            colors: [Colors.blue[100]!, Colors.white],
           ),
         ),
         child: ValueListenableBuilder(

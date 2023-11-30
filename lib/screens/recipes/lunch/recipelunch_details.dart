@@ -10,10 +10,10 @@ class RecipeDetailsLunch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[200],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('My Lunch Recipes'),
-        backgroundColor: Colors.blue[200],
+        backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         centerTitle: true,
         actions: [
           IconButton(
@@ -27,7 +27,7 @@ class RecipeDetailsLunch extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.deepPurple[100]!, Colors.blue[200]!],
+            colors: [Colors.blue[100]!, Colors.white],
           ),
         ),
         child: Padding(

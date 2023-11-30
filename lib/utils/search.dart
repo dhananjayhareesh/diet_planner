@@ -158,125 +158,135 @@ class _SearchFoodState extends State<SearchFood> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[300],
+        backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         title: const Text('Select Your Food'),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(20),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.search),
-                SizedBox(width: 10),
-                Expanded(
-                  child: TextField(
-                    onChanged: (value) {
-                      filterFoodItems(value);
-                    },
-                    style: TextStyle(fontSize: 16),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Search your food",
-                      hintStyle: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue[100]!, Colors.white],
           ),
-          Expanded(
-            child: filteredFoodItems.isEmpty
-                ? Center(
-                    child: Text(
-                      "No food items found, please create new food",
-                      style: TextStyle(fontSize: 18, color: Colors.grey),
-                    ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: ListView.separated(
-                      padding: EdgeInsets.all(8),
-                      itemCount: filteredFoodItems.length,
-                      separatorBuilder: (context, index) => Divider(),
-                      itemBuilder: (context, index) {
-                        final foodItem = filteredFoodItems[index];
-                        return Card(
-                          elevation: 3,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: ListTile(
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  foodItem.name,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context, foodItem);
-                                  },
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Colors.green[700],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            subtitle: Text(
-                              "Calories: ${foodItem.calories} kcal",
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ),
-                        );
+        ),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.search),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextField(
+                      onChanged: (value) {
+                        filterFoodItems(value);
                       },
+                      style: TextStyle(fontSize: 16),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Search your food",
+                        hintStyle: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ),
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 30),
-              primary: Color.fromARGB(255, 236, 34, 84),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25),
+                ],
               ),
             ),
-            onPressed: () async {
-              final newFoodItem = await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddFoodScreen(),
-                ),
-              );
-
-              if (newFoodItem != null) {
-                setState(() {
-                  foodItems.add(newFoodItem);
-                  filterFoodItems(""); // Refresh the filtered list
-
-                  // Save the updated list to the Hive box
-                  foodBox.put(foodBox.length, newFoodItem);
-                });
-              }
-            },
-            child: Text(
-              "Create New Food",
-              style: TextStyle(fontSize: 16),
+            Expanded(
+              child: filteredFoodItems.isEmpty
+                  ? Center(
+                      child: Text(
+                        "No food items found, please create new food",
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: ListView.separated(
+                        padding: EdgeInsets.all(8),
+                        itemCount: filteredFoodItems.length,
+                        separatorBuilder: (context, index) => Divider(),
+                        itemBuilder: (context, index) {
+                          final foodItem = filteredFoodItems[index];
+                          return Card(
+                            elevation: 3,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: ListTile(
+                              title: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    foodItem.name,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.pop(context, foodItem);
+                                    },
+                                    child: Icon(
+                                      Icons.add,
+                                      color: Colors.green[700],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              subtitle: Text(
+                                "Calories: ${foodItem.calories} kcal",
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
             ),
-          ),
-          SizedBox(height: 20),
-        ],
+            SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 30),
+                primary: Color.fromARGB(255, 236, 34, 84),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+              onPressed: () async {
+                final newFoodItem = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddFoodScreen(),
+                  ),
+                );
+
+                if (newFoodItem != null) {
+                  setState(() {
+                    foodItems.add(newFoodItem);
+                    filterFoodItems(""); // Refresh the filtered list
+
+                    // Save the updated list to the Hive box
+                    foodBox.put(foodBox.length, newFoodItem);
+                  });
+                }
+              },
+              child: Text(
+                "Create New Food",
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+            SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }

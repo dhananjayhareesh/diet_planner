@@ -14,17 +14,26 @@ class _ScreenProgressState extends State<ScreenProgress> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[200],
+        backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         title: Text('Your Weekly Progress'),
         centerTitle: true,
       ),
       backgroundColor: Colors.grey[300],
-      body: Center(
-          child: SizedBox(
-              height: 300,
-              child: MyBarGraph(
-                weeklySummary: weeklySummary,
-              ))),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue[100]!, Colors.white],
+          ),
+        ),
+        child: Center(
+            child: SizedBox(
+                height: 300,
+                child: MyBarGraph(
+                  weeklySummary: weeklySummary,
+                ))),
+      ),
     );
   }
 }

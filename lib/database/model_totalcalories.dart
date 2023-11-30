@@ -7,5 +7,9 @@ class TotalCalories {
   @HiveField(0)
   final int total;
 
-  TotalCalories(this.total);
+  @HiveField(1)
+  final String date;
+
+  // Add a default value for date parameter
+  TotalCalories(this.total, [this.date = '']);
 }

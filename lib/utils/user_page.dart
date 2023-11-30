@@ -24,9 +24,9 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[100],
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.indigo[400],
+        backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         title: const Text('Profile'),
         centerTitle: true,
       ),
@@ -35,7 +35,7 @@ class _UserPageState extends State<UserPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.indigo[100]!, Colors.blue[100]!],
+            colors: [Colors.blue[100]!, Colors.white],
           ),
         ),
         child: Padding(

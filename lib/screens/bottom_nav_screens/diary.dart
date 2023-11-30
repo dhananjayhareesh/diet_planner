@@ -1,87 +1,137 @@
+import 'package:dietplanner_project/database/model_totalcalories.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-class ScreenDiary extends StatelessWidget {
-  const ScreenDiary({super.key});
+class ScreenDiary extends StatefulWidget {
+  const ScreenDiary({Key? key}) : super(key: key);
 
+  @override
+  _ScreenDiaryState createState() => _ScreenDiaryState();
+}
+
+class _ScreenDiaryState extends State<ScreenDiary> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Diary'),
         centerTitle: true,
-        backgroundColor: Colors.blue[200],
+        backgroundColor: const Color.fromARGB(255, 40, 139, 220),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
-        child: Column(
-          children: [
-            Container(
-              height: 120,
-              width: double.infinity,
-              child: Card(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: Column(
-                    children: [
-                      Text(
-                        '18/11/2023',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue[100]!, Colors.white],
+          ),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+        child: ValueListenableBuilder(
+          valueListenable:
+              Hive.box<TotalCalories>('totalCaloriesBox').listenable(),
+          builder: (context, box, widget) {
+            // Adjust itemCount to start from 1 to exclude the first card
+            return ListView.builder(
+              itemCount:
+                  getAllDates().length > 1 ? getAllDates().length - 1 : 0,
+              itemBuilder: (context, index) {
+                String date =
+                    getAllDates()[index + 1]; // Add 1 to skip the first date
+                int totalCalories = getTotalCaloriesForDate(date);
+
+                return Container(
+                  height: 120,
+                  width: double.infinity,
+                  margin: const EdgeInsets.only(bottom: 16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 2,
+                        blurRadius: 8,
+                        offset: Offset(0, 3),
                       ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50),
-                            child: Text(
-                              'Calorie Intake :',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          Text(
-                            '2000 kcal',
-                            style: TextStyle(fontSize: 16),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50),
-                            child: Text(
-                              'Water Intake   :',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          Text(
-                            '10 Glasses',
-                            style: TextStyle(fontSize: 16),
-                          )
-                        ],
-                      )
                     ],
                   ),
-                ),
-              ),
-            ),
-          ],
+                  child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            date,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue[700],
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Text(
+                                'Calorie Intake :',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.blue[700],
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                '$totalCalories kcal',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.blue[700],
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          },
         ),
       ),
     );
+  }
+
+  // Function to get total calories for a specific date from Hive
+  int getTotalCaloriesForDate(String date) {
+    var totalCaloriesBox = Hive.box<TotalCalories>('totalCaloriesBox');
+
+    // Retrieve the total calories for the specified date, or return 0 if not found
+    var totalCalories =
+        totalCaloriesBox.get(date, defaultValue: TotalCalories(0, date));
+
+    // Use null-aware operator to check for null before accessing 'total'
+    return totalCalories?.total ?? 0;
+  }
+
+  // Function to get all available dates from Hive
+  List<String> getAllDates() {
+    var totalCaloriesBox = Hive.box<TotalCalories>('totalCaloriesBox');
+
+    // Get all keys (dates) from the box
+    List<String> allDates = totalCaloriesBox.keys.cast<String>().toList();
+
+    // Sort the dates in descending order
+    allDates.sort((a, b) => b.compareTo(a));
+
+    return allDates;
   }
 }

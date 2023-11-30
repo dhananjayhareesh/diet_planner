@@ -19,6 +19,8 @@ class _BmiScreenState extends State<BmiScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 40, 139, 220),
+        centerTitle: true,
         title: Text('BMI Calculator'),
       ),
       body: SingleChildScrollView(

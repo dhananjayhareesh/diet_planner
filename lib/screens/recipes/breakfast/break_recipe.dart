@@ -19,7 +19,7 @@ class _BreakRecipeState extends State<BreakRecipe> {
     return Scaffold(
       appBar: AppBar(
         title: Text('My Breakfast Recipes'),
-        backgroundColor: Colors.blue[200],
+        backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         centerTitle: true,
       ),
       body: Container(
@@ -27,7 +27,7 @@ class _BreakRecipeState extends State<BreakRecipe> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.deepPurple[100]!, Colors.blue[200]!],
+            colors: [Colors.blue[100]!, Colors.white],
           ),
         ),
         child: ValueListenableBuilder(

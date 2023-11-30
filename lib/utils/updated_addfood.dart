@@ -10,62 +10,72 @@ class AddFoodScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.blue[200],
         title: Text('Create New Food'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 3,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.blue[100]!, Colors.white],
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 3,
+                        blurRadius: 7,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  height: 150,
+                  width: 150,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset('assets/diet.png', fit: BoxFit.cover),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                _buildInputField('Food Name', nameController,
+                    'ex. Chicken Soup', Icons.fastfood),
+                const SizedBox(height: 10),
+                _buildInputField('Calories', caloriesController, 'ex. 120 kcal',
+                    Icons.fitness_center),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green, // Change color as needed
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
                     ),
-                  ],
-                ),
-                height: 150,
-                width: 150,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset('assets/diet.png', fit: BoxFit.cover),
-                ),
-              ),
-              const SizedBox(height: 20),
-              _buildInputField('Food Name', nameController, 'ex. Chicken Soup',
-                  Icons.fastfood),
-              const SizedBox(height: 10),
-              _buildInputField('Calories', caloriesController, 'ex. 120 kcal',
-                  Icons.fitness_center),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green, // Change color as needed
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  onPressed: () {
+                    _onAddButtonPressed(context);
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Text(
+                      "Add to Food List",
+                      style: TextStyle(fontSize: 18),
+                    ),
                   ),
                 ),
-                onPressed: () {
-                  _onAddButtonPressed(context);
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: Text(
-                    "Add to Food List",
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

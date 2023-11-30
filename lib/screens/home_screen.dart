@@ -62,8 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ?.total ??
         0;
 
-    print(
-        'Total Calories from Hive: $totalCalories'); // Print total calories for debugging
+    print('Total Calories from Hive: $totalCalories');
 
     return Scaffold(
       appBar: AppBar(
@@ -86,148 +85,160 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Container(
-                height: 300,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 34, 141, 230),
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 20, top: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            'Welcome, ${user.name}',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          Spacer(),
-                          Text(
-                            DateFormat('dd-MM-yyyy').format(DateTime.now()),
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 251, 249, 249),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: CircularPercentIndicator(
-                        radius: 75,
-                        lineWidth: 12,
-                        percent: (((user.calorieBudget ?? 0) - totalCalories) /
-                                (user.calorieBudget ?? 1))
-                            .clamp(0.0,
-                                1.0), // Clamp the percentage between 0 and 1 // Calculate the percentage
-                        progressColor: const Color.fromARGB(255, 25, 88, 196),
-                        backgroundColor:
-                            const Color.fromARGB(255, 162, 224, 238),
-                        circularStrokeCap: CircularStrokeCap.round,
-                        center: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.blue[100]!, Colors.white],
+            ),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Container(
+                  height: 300,
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 34, 141, 230),
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 20, top: 20),
+                        child: Row(
                           children: [
                             Text(
-                              (((user.calorieBudget ?? 0) - totalCalories) < 0
-                                      ? 0
-                                      : (user.calorieBudget ?? 0) -
-                                          totalCalories)
-                                  .toStringAsFixed(0),
-                              // Display remaining calories
+                              'Welcome, ${user.name}',
                               style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
                                 color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              DateFormat('dd-MM-yyyy').format(DateTime.now()),
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 251, 249, 249),
                               ),
                             ),
                             SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'Cal Remaining',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
+                              width: 20,
                             )
                           ],
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 70),
-                      child: const Row(
-                        children: [
-                          Text(
-                            'Consumed',
-                            style: TextStyle(color: Colors.white, fontSize: 15),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: CircularPercentIndicator(
+                          radius: 75,
+                          lineWidth: 12,
+                          percent: (((user.calorieBudget ?? 0) -
+                                      totalCalories) /
+                                  (user.calorieBudget ?? 1))
+                              .clamp(0.0,
+                                  1.0), // Clamp the percentage between 0 and 1 // Calculate the percentage
+                          progressColor: const Color.fromARGB(255, 25, 88, 196),
+                          backgroundColor:
+                              const Color.fromARGB(255, 162, 224, 238),
+                          circularStrokeCap: CircularStrokeCap.round,
+                          center: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                (((user.calorieBudget ?? 0) - totalCalories) < 0
+                                        ? 0
+                                        : (user.calorieBudget ?? 0) -
+                                            totalCalories)
+                                    .toStringAsFixed(0),
+                                // Display remaining calories
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                'Cal Remaining',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
                           ),
-                          Spacer(),
-                          Text(
-                            'Total',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 70),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            height: 18,
-                            width: 18,
-                            child: Image.asset('assets/fire.png'),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            '$totalCalories Cals', // Updated line
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Spacer(),
-                          SizedBox(
-                            height: 18,
-                            width: 18,
-                            child: Image.asset('assets/fire.png'),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            user.calorieBudget.toString(),
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
+                      const SizedBox(
+                        height: 20,
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 80),
+                        child: const Row(
+                          children: [
+                            Text(
+                              'Consumed',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
+                            ),
+                            Spacer(),
+                            Text(
+                              'Total',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 70),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              height: 18,
+                              width: 18,
+                              child: Image.asset('assets/fire.png'),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              '$totalCalories Cals', // Updated line
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Spacer(),
+                            SizedBox(
+                              height: 18,
+                              width: 18,
+                              child: Image.asset('assets/fire.png'),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              user.calorieBudget.toString(),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(15),
-              child: FoodCard(),
-            )
-          ],
+              const Padding(
+                padding: EdgeInsets.all(15),
+                child: FoodCard(),
+              )
+            ],
+          ),
         ),
       ),
     );
