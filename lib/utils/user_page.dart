@@ -116,6 +116,9 @@ class _UserPageState extends State<UserPage> {
                             'Height', user?.height.toString() ?? 'N/A'),
                         buildDetailRow('Target Weight',
                             user?.targetWeight.toString() ?? 'N/A'),
+                        buildDetailRow(
+                            'Activity Level', user?.activityLevel ?? 'N/A'),
+                        buildDetailRow('Goal', user?.goal ?? 'N/A'),
                       ],
                     ),
                   ),

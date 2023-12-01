@@ -21,6 +21,15 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
 
   Map<String, String> errors = {};
 
+  String selectedGoal = 'Maintain Weight'; // Default goal
+  List<String> activityLevels = [
+    'Sedentary',
+    'Lightly Active',
+    'Moderately Active',
+    'Very Active'
+  ];
+  String selectedActivityLevel = 'Sedentary'; // Default activity level
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,7 +73,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     Container(
@@ -72,291 +81,359 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.only(left: 15),
-                            child: Text(
-                              "NAME",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          TextFormField(
-                            controller: nameController,
-                            onChanged: (_) => clearError('name'),
-                            decoration: InputDecoration(
-                              labelText: "Name",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide:
-                                    const BorderSide(color: Colors.black),
-                              ),
-                              errorText: errors['name'],
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                setError('name', 'Please enter your name');
-                                return 'Please enter your name';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          const Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(left: 15),
-                                child: Text(
-                                  'AGE',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 180,
-                              ),
-                              Text(
-                                'SEX',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 130,
-                                child: TextFormField(
-                                  controller: ageController,
-                                  onChanged: (_) => clearError('age'),
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    labelText: "Age",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                      borderSide:
-                                          const BorderSide(color: Colors.black),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 50,
+                                  width: double.infinity,
+                                  child: TextFormField(
+                                    controller: nameController,
+                                    onChanged: (_) => clearError('name'),
+                                    decoration: InputDecoration(
+                                      labelText: "Name",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.black),
+                                      ),
+                                      errorText: errors['name'],
                                     ),
-                                    errorText: errors['age'],
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        setError(
+                                            'name', 'Please enter your name');
+                                        return 'Please enter your name';
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      setError('age', 'Please enter your age');
-                                      return 'Please enter your age';
-                                    }
-                                    return null;
-                                  },
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 80,
-                              ),
-                              SizedBox(
-                                width: 130,
-                                child: TextFormField(
-                                  controller: sexController,
-                                  onChanged: (_) => clearError('sex'),
-                                  decoration: InputDecoration(
-                                    labelText: "Sex",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                      borderSide:
-                                          const BorderSide(color: Colors.black),
-                                    ),
-                                    errorText: errors['sex'],
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      setError('sex', 'Please enter your sex');
-                                      return 'Please enter your sex';
-                                    }
-                                    return null;
-                                  },
+                                const SizedBox(
+                                  height: 30,
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          const Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(left: 15),
-                                child: Text(
-                                  'WEIGHT',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 160,
-                              ),
-                              Text(
-                                'HEIGHT',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 130,
-                                child: TextFormField(
-                                  controller: weightController,
-                                  onChanged: (_) => clearError('weight'),
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    labelText: "Weight",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                      borderSide:
-                                          const BorderSide(color: Colors.black),
-                                    ),
-                                    errorText: errors['weight'],
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      setError(
-                                          'weight', 'Please enter your weight');
-                                      return 'Please enter your weight';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 80,
-                              ),
-                              SizedBox(
-                                width: 130,
-                                child: TextFormField(
-                                  controller: heightController,
-                                  onChanged: (_) => clearError('height'),
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    labelText: "Height",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                      borderSide:
-                                          const BorderSide(color: Colors.black),
-                                    ),
-                                    errorText: errors['height'],
-                                  ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      setError(
-                                          'height', 'Please enter your height');
-                                      return 'Please enter your height';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 100),
-                            child: Text(
-                              'TARGET WEIGHT',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50, right: 50),
-                            child: TextFormField(
-                              controller: targetWeightController,
-                              onChanged: (_) => clearError('targetWeight'),
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                labelText: "Target Weight",
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                  borderSide:
-                                      const BorderSide(color: Colors.black),
-                                ),
-                                errorText: errors['targetWeight'],
-                              ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  setError('targetWeight',
-                                      'Please enter your target weight');
-                                  return 'Please enter your target weight';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          Center(
-                            child: SizedBox(
-                              width: 250,
-                              height: 50,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if (validateForm()) {
-                                    var user = UserModel()
-                                      ..name = nameController.text
-                                      ..age = int.parse(ageController.text)
-                                      ..sex = sexController.text
-                                      ..height =
-                                          double.parse(heightController.text)
-                                      ..weight =
-                                          double.parse(weightController.text)
-                                      ..targetWeight = double.parse(
-                                          targetWeightController.text);
-
-                                    user.calorieBudget = calculateCalorieBudget(
-                                      user.weight,
-                                      user.height,
-                                      user.targetWeight,
-                                      user.age,
-                                      user.sex,
-                                    );
-
-                                    userBox.put('user', user);
-                                    print('User data saved to Hive');
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return CalorieBudget(
-                                            user: user,
-                                          );
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 50,
+                                      width: 100,
+                                      child: TextFormField(
+                                        controller: ageController,
+                                        onChanged: (_) => clearError('age'),
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          labelText: "Age",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: Colors.black),
+                                          ),
+                                          errorText: errors['age'],
+                                        ),
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            setError(
+                                                'age', 'Please enter your age');
+                                            return 'Please enter your age';
+                                          }
+                                          return null;
                                         },
                                       ),
-                                    );
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 4, 63, 111),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    Spacer(),
+                                    SizedBox(
+                                      height: 50,
+                                      width: 100,
+                                      child: TextFormField(
+                                        controller: sexController,
+                                        onChanged: (_) => clearError('sex'),
+                                        decoration: InputDecoration(
+                                          labelText: "Sex",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: Colors.black),
+                                          ),
+                                          errorText: errors['sex'],
+                                        ),
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            setError(
+                                                'sex', 'Please enter your sex');
+                                            return 'Please enter your sex';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    SizedBox(
+                                      height: 50,
+                                      width: 100,
+                                      child: TextFormField(
+                                        controller: heightController,
+                                        onChanged: (_) => clearError('height'),
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          labelText: "Height(cm)",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: Colors.black),
+                                          ),
+                                          errorText: errors['height'],
+                                        ),
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            setError('height',
+                                                'Please enter your height');
+                                            return 'Please enter your height';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 50,
+                                      width: 150,
+                                      child: TextFormField(
+                                        controller: weightController,
+                                        onChanged: (_) => clearError('weight'),
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          labelText: "Weight(kg)",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: Colors.black),
+                                          ),
+                                          errorText: errors['weight'],
+                                        ),
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            setError('weight',
+                                                'Please enter your weight');
+                                            return 'Please enter your weight';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    SizedBox(
+                                      height: 50,
+                                      width: 150,
+                                      child: TextFormField(
+                                        controller: targetWeightController,
+                                        onChanged: (_) =>
+                                            clearError('targetWeight'),
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          labelText: "Target Weight(kg)",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            borderSide: const BorderSide(
+                                                color: Colors.black),
+                                          ),
+                                          errorText: errors['targetWeight'],
+                                        ),
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            setError('targetWeight',
+                                                'Please enter your target weight');
+                                            return 'Please enter your target weight';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 40,
+                                ),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 110),
+                                  child: Text(
+                                    'ACTIVITY LEVEL',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                                child: const Text(
-                                  'Continue',
-                                  style: TextStyle(fontSize: 20),
+                                const SizedBox(
+                                  height: 10,
                                 ),
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 50, right: 50),
+                                  child: SizedBox(
+                                    height: 60,
+                                    width: double.infinity,
+                                    child: DropdownButtonFormField(
+                                      value: selectedActivityLevel,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedActivityLevel =
+                                              value.toString();
+                                        });
+                                      },
+                                      items: activityLevels.map((level) {
+                                        return DropdownMenuItem(
+                                          value: level,
+                                          child: Text(
+                                            level,
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        );
+                                      }).toList(),
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: const BorderSide(
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 110),
+                                  child: Text(
+                                    'WEIGHT GOAL',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 50, right: 50),
+                                  child: SizedBox(
+                                    height: 60,
+                                    width: double.infinity,
+                                    child: DropdownButtonFormField(
+                                      value: selectedGoal,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedGoal = value.toString();
+                                        });
+                                      },
+                                      items: [
+                                        'Maintain Weight',
+                                        'Lose Weight',
+                                        'Gain Weight'
+                                      ].map((goal) {
+                                        return DropdownMenuItem(
+                                          value: goal,
+                                          child: Text(
+                                            goal,
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        );
+                                      }).toList(),
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          borderSide: const BorderSide(
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 50,
+                                ),
+                                Center(
+                                  child: SizedBox(
+                                    width: 250,
+                                    height: 50,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        if (validateForm()) {
+                                          var user = UserModel()
+                                            ..name = nameController.text
+                                            ..age =
+                                                int.parse(ageController.text)
+                                            ..sex = sexController.text
+                                            ..height = double.parse(
+                                                heightController.text)
+                                            ..weight = double.parse(
+                                                weightController.text)
+                                            ..targetWeight = double.parse(
+                                                targetWeightController.text)
+                                            ..activityLevel =
+                                                selectedActivityLevel
+                                            ..goal = selectedGoal;
+
+                                          user.calorieBudget =
+                                              calculateCalorieBudget(
+                                            user.weight,
+                                            user.height,
+                                            user.targetWeight,
+                                            user.age,
+                                            user.sex,
+                                            user.activityLevel,
+                                            user.goal,
+                                          );
+
+                                          userBox.put('user', user);
+                                          print('User data saved to Hive');
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return CalorieBudget(
+                                                  user: user,
+                                                );
+                                              },
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 4, 63, 111),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                        ),
+                                      ),
+                                      child: const Text(
+                                        'Continue',
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -378,6 +455,8 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
     double targetWeight,
     int age,
     String sex,
+    String activityLevel,
+    String goal,
   ) {
     double bmr;
     if (sex.toLowerCase() == 'male') {
@@ -386,8 +465,24 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
       bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
     }
 
-    double calorieBudget = bmr * 1.55;
+    double activityMultiplier = 1.0;
+    if (activityLevel == 'Sedentary') {
+      activityMultiplier = 1.2;
+    } else if (activityLevel == 'Lightly Active') {
+      activityMultiplier = 1.375;
+    } else if (activityLevel == 'Moderately Active') {
+      activityMultiplier = 1.55;
+    } else if (activityLevel == 'Very Active') {
+      activityMultiplier = 1.725;
+    }
 
+    if (goal == 'Lose Weight') {
+      activityMultiplier -= 0.2;
+    } else if (goal == 'Gain Weight') {
+      activityMultiplier += 0.2;
+    }
+
+    double calorieBudget = bmr * activityMultiplier;
     calorieBudget = calorieBudget.roundToDouble();
 
     return calorieBudget;
@@ -403,12 +498,12 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
     }
 
     if (ageController.text.isEmpty) {
-      setError('age', 'Please enter your age');
+      setError('age', 'Enter age');
       isValid = false;
     }
 
     if (sexController.text.isEmpty) {
-      setError('sex', 'Please enter your sex');
+      setError('sex', 'Enter sex');
       isValid = false;
     }
 

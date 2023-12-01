@@ -25,6 +25,12 @@ class UserModel extends HiveObject {
   @HiveField(6)
   late double? calorieBudget;
 
+  @HiveField(7)
+  late String activityLevel;
+
+  @HiveField(8)
+  late String goal;
+
   UserModel({
     this.name = '',
     this.age = 0,
@@ -33,5 +39,7 @@ class UserModel extends HiveObject {
     this.height = 0.0,
     this.targetWeight = 0.0,
     this.calorieBudget = 0.0,
+    this.activityLevel = '',
+    this.goal = '',
   });
 }

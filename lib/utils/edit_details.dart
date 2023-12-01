@@ -18,6 +18,16 @@ class _EditDetailsState extends State<EditDetails> {
   late TextEditingController weightController;
   late TextEditingController heightController;
   late TextEditingController targetWeightController;
+  late String selectedActivityLevel;
+  late String selectedGoal;
+
+  // Define activityLevels here
+  List<String> activityLevels = [
+    'Sedentary',
+    'Lightly Active',
+    'Moderately Active',
+    'Very Active',
+  ];
 
   @override
   void initState() {
@@ -32,6 +42,9 @@ class _EditDetailsState extends State<EditDetails> {
         TextEditingController(text: widget.user?.height.toString() ?? '');
     targetWeightController =
         TextEditingController(text: widget.user?.targetWeight.toString() ?? '');
+    selectedActivityLevel = widget.user?.activityLevel ?? activityLevels.first;
+    selectedGoal = widget.user?.goal ??
+        ['Maintain Weight', 'Lose Weight', 'Gain Weight'].first;
   }
 
   @override
@@ -88,6 +101,17 @@ class _EditDetailsState extends State<EditDetails> {
                       'Height', heightController, TextInputType.number),
                   buildTextField('Target Weight', targetWeightController,
                       TextInputType.number),
+                  buildDropdown('Activity Level', selectedActivityLevel,
+                      (value) {
+                    setState(() {
+                      selectedActivityLevel = value.toString();
+                    });
+                  }, activityLevels),
+                  buildDropdown('Weight Goal', selectedGoal, (value) {
+                    setState(() {
+                      selectedGoal = value.toString();
+                    });
+                  }, ['Maintain Weight', 'Lose Weight', 'Gain Weight']),
                   const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
@@ -99,6 +123,8 @@ class _EditDetailsState extends State<EditDetails> {
                         height: double.tryParse(heightController.text) ?? 0.0,
                         targetWeight:
                             double.tryParse(targetWeightController.text) ?? 0.0,
+                        activityLevel: selectedActivityLevel,
+                        goal: selectedGoal,
                       );
 
                       // Recalculate calorie budget
@@ -108,6 +134,8 @@ class _EditDetailsState extends State<EditDetails> {
                         updatedUser.targetWeight,
                         updatedUser.age,
                         updatedUser.sex,
+                        updatedUser.activityLevel,
+                        updatedUser.goal,
                       );
 
                       // Update user details in Hive
@@ -160,10 +188,40 @@ class _EditDetailsState extends State<EditDetails> {
       ),
     );
   }
+
+  Widget buildDropdown(
+      String label, String value, Function onChanged, List<String> items) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: DropdownButtonFormField(
+        value: value,
+        onChanged: onChanged as void Function(String?)?,
+        items: items.map((item) {
+          return DropdownMenuItem(
+            value: item,
+            child: Text(item),
+          );
+        }).toList(),
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: TextStyle(color: Colors.indigo),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.indigo, width: 2.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 double calculateCalorieBudget(
-    double weight, double height, double targetWeight, int age, String sex) {
+    double weight, double height, double targetWeight, int age, String sex,
+    [String activityLevel = 'Sedentary', String goal = 'Maintain Weight']) {
   double bmr;
   if (sex.toLowerCase() == 'male') {
     bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
@@ -171,7 +229,24 @@ double calculateCalorieBudget(
     bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
   }
 
-  double calorieBudget = bmr * 1.55;
+  double activityMultiplier = 1.0;
+  if (activityLevel == 'Sedentary') {
+    activityMultiplier = 1.2;
+  } else if (activityLevel == 'Lightly Active') {
+    activityMultiplier = 1.375;
+  } else if (activityLevel == 'Moderately Active') {
+    activityMultiplier = 1.55;
+  } else if (activityLevel == 'Very Active') {
+    activityMultiplier = 1.725;
+  }
+
+  if (goal == 'Lose Weight') {
+    activityMultiplier -= 0.2;
+  } else if (goal == 'Gain Weight') {
+    activityMultiplier += 0.2;
+  }
+
+  double calorieBudget = bmr * activityMultiplier;
   calorieBudget = calorieBudget.roundToDouble();
 
   return calorieBudget;
