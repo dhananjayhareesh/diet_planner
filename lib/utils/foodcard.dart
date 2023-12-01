@@ -1,9 +1,11 @@
+import 'package:dietplanner_project/database/db_waterintake.dart';
 import 'package:dietplanner_project/utils/bmi.dart';
 import 'package:dietplanner_project/utils/selected_food.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class WaterTracker extends StatefulWidget {
-  const WaterTracker({super.key});
+  const WaterTracker({Key? key}) : super(key: key);
 
   @override
   _WaterTrackerState createState() => _WaterTrackerState();
@@ -11,6 +13,34 @@ class WaterTracker extends StatefulWidget {
 
 class _WaterTrackerState extends State<WaterTracker> {
   int glassesConsumed = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadWaterIntake();
+  }
+
+  void _loadWaterIntake() async {
+    var waterIntakeBox = Hive.box<WaterIntakeModel>('waterbox');
+    var currentDate = DateTime.now().toLocal().toString().split(' ')[0];
+
+    // Retrieve the WaterIntakeModel for the current date
+    var waterIntake = waterIntakeBox.get(currentDate,
+        defaultValue: WaterIntakeModel(0, currentDate));
+
+    // Check if the stored date is not equal to the current date
+    if (waterIntake?.date != currentDate) {
+      // It's a new day, reset glassesConsumed to 0
+      glassesConsumed = 0;
+      // Save the reset value to Hive
+      _saveWaterIntake();
+    } else {
+      // Update the glassesConsumed value with the stored value
+      setState(() {
+        glassesConsumed = waterIntake?.glassesConsumed ?? 0;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +80,7 @@ class _WaterTrackerState extends State<WaterTracker> {
                   setState(() {
                     glassesConsumed =
                         (glassesConsumed - 1).clamp(0, double.infinity).toInt();
+                    _saveWaterIntake();
                   });
                 },
                 child: SizedBox(
@@ -65,6 +96,7 @@ class _WaterTrackerState extends State<WaterTracker> {
                 onTap: () {
                   setState(() {
                     glassesConsumed++;
+                    _saveWaterIntake();
                   });
                 },
                 child: SizedBox(
@@ -78,6 +110,22 @@ class _WaterTrackerState extends State<WaterTracker> {
         )
       ],
     );
+  }
+
+  // Function to save water intake to Hive
+  void _saveWaterIntake() async {
+    var waterIntakeBox = Hive.box<WaterIntakeModel>('waterbox');
+    var currentDate = DateTime.now().toLocal().toString().split(' ')[0];
+
+    // Retrieve or create a WaterIntakeModel for the current date
+    var waterIntake = waterIntakeBox.get(currentDate,
+        defaultValue: WaterIntakeModel(0, currentDate));
+
+    // Update the glassesConsumed value if waterIntake is not null
+    waterIntake?.glassesConsumed = glassesConsumed;
+
+    // Save the updated WaterIntakeModel to Hive
+    await waterIntakeBox.put(currentDate, waterIntake!);
   }
 }
 

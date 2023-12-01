@@ -29,6 +29,27 @@ class _TabFoodState extends State<TabFood> {
 
     // Retrieve existing selected items from the Hive box
     selectedItems = selectedFoodBox.values.toList();
+
+    // Check if it's a new day, and clear data if needed
+    checkAndClearOldData();
+  }
+
+  void checkAndClearOldData() {
+    String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+    if (totalCaloriesBox.containsKey(currentDate)) {
+      // It's the same day, do nothing
+      return;
+    }
+
+    // It's a new day, clear selected items for the new day
+    selectedItems.clear();
+    updateHive(selectedItems); // Clear selected items in Hive
+
+    // Reset total calories to 0 for the new day
+    totalCaloriesBox.put(currentDate, TotalCalories(0));
+
+    print('Data cleared for the new day: $currentDate');
   }
 
   @override

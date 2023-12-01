@@ -2,6 +2,7 @@ import 'package:dietplanner_project/database/db_breakrecipe.dart';
 import 'package:dietplanner_project/database/db_dinnerrecipe.dart';
 import 'package:dietplanner_project/database/db_lunchrecipe.dart';
 import 'package:dietplanner_project/database/db_model.dart';
+import 'package:dietplanner_project/database/db_waterintake.dart';
 import 'package:dietplanner_project/database/model_food.dart';
 import 'package:dietplanner_project/database/model_selected_food.dart';
 import 'package:dietplanner_project/database/model_totalcalories.dart';
@@ -18,6 +19,7 @@ void main() async {
   Hive.registerAdapter(RecipeAdapter());
   Hive.registerAdapter(RecipeLunchAdapter());
   Hive.registerAdapter(RecipeDinnerAdapter());
+  Hive.registerAdapter(WaterIntakeModelAdapter());
   await Hive.openBox<UserModel>('userBox');
   await Hive.openBox<FoodItem>('foodBox');
   await Hive.openBox<TotalCalories>('totalCaloriesBox');
@@ -25,6 +27,7 @@ void main() async {
   await Hive.openBox<Recipe>('recipes');
   await Hive.openBox<RecipeLunch>('lunchrecipes');
   await Hive.openBox<RecipeDinner>('dinnerrecipes');
+  await Hive.openBox<WaterIntakeModel>('waterbox');
   runApp(MyApp());
 }
 

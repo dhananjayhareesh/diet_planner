@@ -35,74 +35,11 @@ class _CreateRecipeState extends State<CreateRecipe> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: Colors.grey),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: titleController,
-                      maxLength: 20,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Title is required';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Title',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                      ),
-                    ),
-                  ),
-                ),
+                _buildInputContainer(titleController, 'Title', 1),
                 SizedBox(height: 16.0),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: Colors.grey),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: ingredientsController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Ingredients are required';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Ingredients',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                      ),
-                      maxLines: 3,
-                    ),
-                  ),
-                ),
+                _buildInputContainer(ingredientsController, 'Ingredients', 3),
                 SizedBox(height: 16.0),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: Colors.grey),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: preparationController,
-                      decoration: InputDecoration(
-                        labelText: 'Preparation',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                      ),
-                      maxLines: 5,
-                    ),
-                  ),
-                ),
+                _buildInputContainer(preparationController, 'Preparation', 5),
                 SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
@@ -111,15 +48,15 @@ class _CreateRecipeState extends State<CreateRecipe> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 162, 169, 61),
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
+                    backgroundColor: Color.fromARGB(255, 162, 169, 61),
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
                   child: Text('Add Image'),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 Container(
                   height: 150,
                   width: double.infinity,
@@ -136,9 +73,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                           child: Text('No Image Uploaded'),
                         ),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
                 Center(
                   child: ElevatedButton(
                     onPressed: () {
@@ -157,16 +92,49 @@ class _CreateRecipeState extends State<CreateRecipe> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 53, 160, 56),
-                        padding: EdgeInsets.symmetric(horizontal: 16.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
+                      backgroundColor: Color.fromARGB(255, 53, 160, 56),
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
                     child: Text('Add to Recipe List'),
                   ),
                 ),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInputContainer(
+    TextEditingController controller,
+    String labelText,
+    int maxLines,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        border: Border.all(color: Colors.grey),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextFormField(
+          controller: controller,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return '$labelText is required';
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            labelText: labelText,
+            border: InputBorder.none,
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+          ),
+          maxLines: maxLines,
         ),
       ),
     );
