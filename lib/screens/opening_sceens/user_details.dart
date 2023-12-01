@@ -64,7 +64,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                         ),
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 50,
                     ),
                     Container(
@@ -84,6 +84,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                           ),
                           TextFormField(
                             controller: nameController,
+                            onChanged: (_) => clearError('name'),
                             decoration: InputDecoration(
                               labelText: "Name",
                               border: OutlineInputBorder(
@@ -95,6 +96,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
+                                setError('name', 'Please enter your name');
                                 return 'Please enter your name';
                               }
                               return null;
@@ -130,6 +132,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                 width: 130,
                                 child: TextFormField(
                                   controller: ageController,
+                                  onChanged: (_) => clearError('age'),
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     labelText: "Age",
@@ -142,6 +145,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
+                                      setError('age', 'Please enter your age');
                                       return 'Please enter your age';
                                     }
                                     return null;
@@ -155,6 +159,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                 width: 130,
                                 child: TextFormField(
                                   controller: sexController,
+                                  onChanged: (_) => clearError('sex'),
                                   decoration: InputDecoration(
                                     labelText: "Sex",
                                     border: OutlineInputBorder(
@@ -166,6 +171,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
+                                      setError('sex', 'Please enter your sex');
                                       return 'Please enter your sex';
                                     }
                                     return null;
@@ -204,6 +210,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                 width: 130,
                                 child: TextFormField(
                                   controller: weightController,
+                                  onChanged: (_) => clearError('weight'),
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     labelText: "Weight",
@@ -216,6 +223,8 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
+                                      setError(
+                                          'weight', 'Please enter your weight');
                                       return 'Please enter your weight';
                                     }
                                     return null;
@@ -229,6 +238,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                 width: 130,
                                 child: TextFormField(
                                   controller: heightController,
+                                  onChanged: (_) => clearError('height'),
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     labelText: "Height",
@@ -241,6 +251,8 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
+                                      setError(
+                                          'height', 'Please enter your height');
                                       return 'Please enter your height';
                                     }
                                     return null;
@@ -269,6 +281,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                             padding: const EdgeInsets.only(left: 50, right: 50),
                             child: TextFormField(
                               controller: targetWeightController,
+                              onChanged: (_) => clearError('targetWeight'),
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 labelText: "Target Weight",
@@ -281,6 +294,8 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
+                                  setError('targetWeight',
+                                      'Please enter your target weight');
                                   return 'Please enter your target weight';
                                 }
                                 return null;
@@ -297,7 +312,6 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   if (validateForm()) {
-                                    //save user data to hive
                                     var user = UserModel()
                                       ..name = nameController.text
                                       ..age = int.parse(ageController.text)
@@ -384,37 +398,49 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
     errors = {};
 
     if (nameController.text.isEmpty) {
-      errors['name'] = 'Please enter your name';
+      setError('name', 'Please enter your name');
       isValid = false;
     }
 
     if (ageController.text.isEmpty) {
-      errors['age'] = 'Please enter your age';
+      setError('age', 'Please enter your age');
       isValid = false;
     }
 
     if (sexController.text.isEmpty) {
-      errors['sex'] = 'Please enter your sex';
+      setError('sex', 'Please enter your sex');
       isValid = false;
     }
 
     if (weightController.text.isEmpty) {
-      errors['weight'] = 'Enter weight';
+      setError('weight', 'Enter weight');
       isValid = false;
     }
 
     if (heightController.text.isEmpty) {
-      errors['height'] = 'Enter height';
+      setError('height', 'Enter height');
       isValid = false;
     }
 
     if (targetWeightController.text.isEmpty) {
-      errors['targetWeight'] = 'Enter target weight';
+      setError('targetWeight', 'Enter target weight');
       isValid = false;
     }
 
     setState(() {}); // Update the UI to show error messages
 
     return isValid;
+  }
+
+  void setError(String field, String message) {
+    setState(() {
+      errors[field] = message;
+    });
+  }
+
+  void clearError(String field) {
+    setState(() {
+      errors.remove(field);
+    });
   }
 }
