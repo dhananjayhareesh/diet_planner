@@ -17,6 +17,15 @@ class _ScreenProgressState extends State<ScreenProgress> {
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         title: Text('Your Weekly Progress'),
         centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue[500]!, Colors.blue[900]!],
+            ),
+          ),
+        ),
       ),
       backgroundColor: Colors.grey[300],
       body: Container(

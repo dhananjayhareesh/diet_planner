@@ -22,6 +22,15 @@ class _BmiScreenState extends State<BmiScreen> {
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         centerTitle: true,
         title: Text('BMI Calculator'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue[500]!, Colors.blue[900]!],
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -15,6 +15,15 @@ class RecipeDetailsLunch extends StatelessWidget {
         title: Text('My Lunch Recipes'),
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue[500]!, Colors.blue[900]!],
+            ),
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {},

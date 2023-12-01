@@ -26,6 +26,15 @@ class _CreateRecipeState extends State<CreateRecipeLunch> {
         centerTitle: true,
         backgroundColor: Colors.blue[200],
         title: Text('Create Lunch Recipe'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue[500]!, Colors.blue[900]!],
+            ),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

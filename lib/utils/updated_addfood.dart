@@ -15,6 +15,15 @@ class AddFoodScreen extends StatelessWidget {
         backgroundColor: Colors.blue[200],
         title: Text('Create New Food'),
         centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue[500]!, Colors.blue[900]!],
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(

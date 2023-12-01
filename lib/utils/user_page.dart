@@ -29,6 +29,15 @@ class _UserPageState extends State<UserPage> {
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         title: const Text('Profile'),
         centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue[500]!, Colors.blue[900]!],
+            ),
+          ),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(

@@ -161,6 +161,15 @@ class _SearchFoodState extends State<SearchFood> {
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         title: const Text('Select Your Food'),
         centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue[500]!, Colors.blue[900]!],
+            ),
+          ),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(

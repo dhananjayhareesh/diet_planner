@@ -1,12 +1,10 @@
 import 'package:dietplanner_project/screens/recipes/breakfast/break_recipe.dart';
 import 'package:dietplanner_project/screens/recipes/dinner/dinner_recipe.dart';
-
 import 'package:dietplanner_project/screens/recipes/lunch/lunch_recipe.dart';
-
 import 'package:flutter/material.dart';
 
 class ScreenRecipes extends StatelessWidget {
-  const ScreenRecipes({super.key});
+  const ScreenRecipes({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +13,15 @@ class ScreenRecipes extends StatelessWidget {
         title: Text('My Recipes'),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue[500]!, Colors.blue[900]!],
+            ),
+          ),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -25,106 +32,67 @@ class ScreenRecipes extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 30, right: 20, left: 20),
+          padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Center(
-                  child: Text(
-                    'BREAKFAST',
-                    style: TextStyle(fontSize: 20, color: Colors.grey[600]),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => BreakRecipe()),
-                    );
-                  },
-                  child: Container(
-                    height: 150,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      image: DecorationImage(
-                        image: AssetImage('assets/recipebreak.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: Text(
-                    'LUNCH',
-                    style: TextStyle(fontSize: 20, color: Colors.grey[600]),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LunchRecipe()),
-                    );
-                  },
-                  child: Container(
-                    height: 150,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      image: DecorationImage(
-                        image: AssetImage('assets/recipelunch.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: Text(
-                    'DINNER',
-                    style: TextStyle(fontSize: 20, color: Colors.grey[600]),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DinnerRecipe()),
-                    );
-                  },
-                  child: Container(
-                    height: 150,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      image: DecorationImage(
-                        image: AssetImage('assets/recipedinner.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
+                buildRecipeCategory('BREAKFAST', 'assets/recipebreak.jpg', () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BreakRecipe()),
+                  );
+                }),
+                buildRecipeCategory('LUNCH', 'assets/recipelunch.jpg', () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LunchRecipe()),
+                  );
+                }),
+                buildRecipeCategory('DINNER', 'assets/recipedinner.jpg', () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DinnerRecipe()),
+                  );
+                }),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildRecipeCategory(
+      String category, String imageAsset, VoidCallback onTap) {
+    return Column(
+      children: [
+        Center(
+          child: Text(
+            category,
+            style: TextStyle(
+                fontSize: 24,
+                color: Colors.grey[600],
+                fontWeight: FontWeight.bold),
+          ),
+        ),
+        SizedBox(height: 10),
+        GestureDetector(
+          onTap: onTap,
+          child: Container(
+            height: 200,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              image: DecorationImage(
+                image: AssetImage(imageAsset),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 20),
+      ],
     );
   }
 }

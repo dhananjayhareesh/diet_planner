@@ -141,10 +141,12 @@ class FoodCard extends StatelessWidget {
           child: Card(
             elevation: 4,
             color: const Color.fromARGB(255, 255, 255, 255),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Row(
               children: [
                 SizedBox(
-                  height: 100,
+                  height: 70,
                   width: 100,
                   child: Image.asset('assets/break.jpg'),
                 ),
@@ -187,10 +189,12 @@ class FoodCard extends StatelessWidget {
           child: Card(
             elevation: 4,
             color: const Color.fromARGB(255, 255, 255, 255),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Row(
               children: [
                 SizedBox(
-                  height: 100,
+                  height: 60,
                   width: 100,
                   child: Image.asset('assets/lunch.jpg'),
                 ),
@@ -233,10 +237,12 @@ class FoodCard extends StatelessWidget {
           child: Card(
             elevation: 4,
             color: const Color.fromARGB(255, 255, 255, 255),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Row(
               children: [
                 SizedBox(
-                  height: 100,
+                  height: 70,
                   width: 100,
                   child: Image.asset('assets/snacks.jpg'),
                 ),
@@ -279,10 +285,12 @@ class FoodCard extends StatelessWidget {
           child: Card(
             elevation: 4,
             color: const Color.fromARGB(255, 255, 255, 255),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Row(
               children: [
                 SizedBox(
-                  height: 100,
+                  height: 60,
                   width: 100,
                   child: Image.asset('assets/dinner.jpg'),
                 ),
@@ -325,6 +333,8 @@ class FoodCard extends StatelessWidget {
           child: Card(
             elevation: 4,
             color: const Color.fromARGB(255, 255, 255, 255),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: WaterTracker(),
           ),
         ),
@@ -334,53 +344,75 @@ class FoodCard extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: Container(
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 144, 202, 249),
-              borderRadius: BorderRadius.all(Radius.circular(50)),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(255, 144, 202, 249),
+                  Color.fromARGB(255, 78, 123, 182)
+                ],
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
             ),
+            padding: const EdgeInsets.all(20),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: Text(
-                    'Calculate',
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
+                Text(
+                  'Calculate',
+                  style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
+                const SizedBox(height: 10),
+                Text(
                   'Your',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
+                const SizedBox(height: 10),
+                Text(
                   'BMI',
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+                  style: TextStyle(
+                      fontSize: 48,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white),
                 ),
-                SizedBox(
-                  width: 200,
-                  height: 45,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 4, 63, 111),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => BmiScreen()));
-                      },
-                      child: const Text('Calculate Now'),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 4, 63, 111),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
                     ),
                   ),
-                )
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => BmiScreen()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 24),
+                    child: Text(
+                      'Calculate Now',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

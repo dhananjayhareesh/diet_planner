@@ -19,6 +19,15 @@ class _ScreenDiaryState extends State<ScreenDiary> {
         title: Text('Your Diary'),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomRight,
+              colors: [Colors.blue[500]!, Colors.blue[900]!],
+            ),
+          ),
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -45,85 +54,43 @@ class _ScreenDiaryState extends State<ScreenDiary> {
                     int totalCalories = getTotalCaloriesForDate(date);
                     int totalWaterIntake = getTotalWaterIntakeForDate(date);
 
-                    return Container(
-                      height: 120,
-                      width: double.infinity,
-                      margin: const EdgeInsets.only(bottom: 16.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
+                    return Card(
+                      elevation: 8,
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
-                            spreadRadius: 2,
-                            blurRadius: 8,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
                       ),
-                      child: Card(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
+                      child: Container(
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.blue[200]!,
+                              Colors.blue[100]!,
+                              Colors.white,
+                              Colors.white,
+                            ],
+                          ),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 date,
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blue[700],
                                 ),
                               ),
-                              SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Calorie Intake :',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.blue[700],
-                                    ),
-                                  ),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    '$totalCalories kcal',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.blue[700],
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Water Intake   :',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.blue[700],
-                                    ),
-                                  ),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    '$totalWaterIntake glasses',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.blue[700],
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              SizedBox(height: 12),
+                              buildInfoRow(
+                                  'Calorie Intake', '$totalCalories kcal'),
+                              buildInfoRow(
+                                  'Water Intake', '$totalWaterIntake glasses'),
                             ],
                           ),
                         ),
@@ -135,6 +102,32 @@ class _ScreenDiaryState extends State<ScreenDiary> {
             );
           },
         ),
+      ),
+    );
+  }
+
+  Widget buildInfoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.blue[700],
+            ),
+          ),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.blue[700],
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }
