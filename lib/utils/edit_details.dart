@@ -14,7 +14,7 @@ class EditDetails extends StatefulWidget {
 class _EditDetailsState extends State<EditDetails> {
   late TextEditingController nameController;
   late TextEditingController ageController;
-  late TextEditingController sexController;
+  late String selectedSex; // Updated variable for the selected sex
   late TextEditingController weightController;
   late TextEditingController heightController;
   late TextEditingController targetWeightController;
@@ -29,13 +29,16 @@ class _EditDetailsState extends State<EditDetails> {
     'Very Active',
   ];
 
+  // Define sex options here
+  List<String> sexOptions = ['Male', 'Female'];
+
   @override
   void initState() {
     super.initState();
     nameController = TextEditingController(text: widget.user?.name ?? '');
     ageController =
         TextEditingController(text: widget.user?.age.toString() ?? '');
-    sexController = TextEditingController(text: widget.user?.sex ?? '');
+    selectedSex = widget.user?.sex ?? ''; // Initialize selectedSex
     weightController =
         TextEditingController(text: widget.user?.weight.toString() ?? '');
     heightController =
@@ -51,7 +54,6 @@ class _EditDetailsState extends State<EditDetails> {
   void dispose() {
     nameController.dispose();
     ageController.dispose();
-    sexController.dispose();
     weightController.dispose();
     heightController.dispose();
     targetWeightController.dispose();
@@ -94,7 +96,11 @@ class _EditDetailsState extends State<EditDetails> {
                 children: [
                   buildTextField('Name', nameController),
                   buildTextField('Age', ageController, TextInputType.number),
-                  buildTextField('Sex', sexController),
+                  buildDropdown('Sex', selectedSex, (value) {
+                    setState(() {
+                      selectedSex = value.toString();
+                    });
+                  }, sexOptions),
                   buildTextField(
                       'Weight', weightController, TextInputType.number),
                   buildTextField(
@@ -118,7 +124,7 @@ class _EditDetailsState extends State<EditDetails> {
                       final updatedUser = UserModel(
                         name: nameController.text,
                         age: int.tryParse(ageController.text) ?? 0,
-                        sex: sexController.text,
+                        sex: selectedSex, // Use selectedSex instead of text
                         weight: double.tryParse(weightController.text) ?? 0.0,
                         height: double.tryParse(heightController.text) ?? 0.0,
                         targetWeight:
@@ -146,7 +152,7 @@ class _EditDetailsState extends State<EditDetails> {
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 15),
-                      primary: Colors.indigo,
+                      backgroundColor: Colors.indigo,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),

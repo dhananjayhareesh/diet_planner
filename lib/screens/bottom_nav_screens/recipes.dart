@@ -32,29 +32,37 @@ class ScreenRecipes extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                buildRecipeCategory('BREAKFAST', 'assets/recipebreak.jpg', () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => BreakRecipe()),
-                  );
-                }),
-                buildRecipeCategory('LUNCH', 'assets/recipelunch.jpg', () {
+                buildRecipeCategoryCard(
+                  'BREAKFAST',
+                  'assets/recipebreak.jpg',
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BreakRecipe()),
+                    );
+                  },
+                ),
+                buildRecipeCategoryCard('LUNCH', 'assets/recipelunch.jpg', () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LunchRecipe()),
                   );
                 }),
-                buildRecipeCategory('DINNER', 'assets/recipedinner.jpg', () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DinnerRecipe()),
-                  );
-                }),
+                buildRecipeCategoryCard(
+                  'DINNER',
+                  'assets/recipedinner.jpg',
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DinnerRecipe()),
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -63,36 +71,64 @@ class ScreenRecipes extends StatelessWidget {
     );
   }
 
-  Widget buildRecipeCategory(
-      String category, String imageAsset, VoidCallback onTap) {
-    return Column(
-      children: [
-        Center(
-          child: Text(
-            category,
-            style: TextStyle(
-                fontSize: 24,
-                color: Colors.grey[600],
-                fontWeight: FontWeight.bold),
-          ),
-        ),
-        SizedBox(height: 10),
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
+  Widget buildRecipeCategoryCard(
+    String category,
+    String imageAsset,
+    VoidCallback onTap,
+  ) {
+    return Card(
+      elevation: 5, // Add elevation for shadow
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Stack(
+        children: [
+          Container(
             height: 200,
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               image: DecorationImage(
                 image: AssetImage(imageAsset),
-                fit: BoxFit.cover,
+                fit: BoxFit.cover, // Adjusted to cover the entire container
               ),
             ),
           ),
-        ),
-        SizedBox(height: 20),
-      ],
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20.0),
+                  bottomRight: Radius.circular(20.0),
+                ),
+                color: Colors.black.withOpacity(0.7),
+              ),
+              child: Text(
+                category,
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          Positioned.fill(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: onTap,
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

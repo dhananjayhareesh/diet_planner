@@ -22,6 +22,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.blue[200],
@@ -36,81 +37,90 @@ class _CreateRecipeState extends State<CreateRecipe> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildInputContainer(titleController, 'Title', 1),
-                SizedBox(height: 16.0),
-                _buildInputContainer(ingredientsController, 'Ingredients', 3),
-                SizedBox(height: 16.0),
-                _buildInputContainer(preparationController, 'Preparation', 5),
-                SizedBox(height: 16.0),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      _getImage();
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 162, 169, 61),
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: Text('Add Image'),
-                ),
-                SizedBox(height: 20),
-                Container(
-                  height: 150,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: _image != null
-                      ? Image.file(
-                          _image!,
-                          fit: BoxFit.cover,
-                        )
-                      : Center(
-                          child: Text('No Image Uploaded'),
-                        ),
-                ),
-                SizedBox(height: 20),
-                Center(
-                  child: ElevatedButton(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue[100]!, Colors.white],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInputContainer(titleController, 'Title', 1),
+                  SizedBox(height: 16.0),
+                  _buildInputContainer(ingredientsController, 'Ingredients', 3),
+                  SizedBox(height: 16.0),
+                  _buildInputContainer(preparationController, 'Preparation', 5),
+                  SizedBox(height: 16.0),
+                  ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
-                        if (_image == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text('Image is required'),
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
-                        } else {
-                          _addToRecipeList();
-                        }
+                        _getImage();
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 53, 160, 56),
+                      backgroundColor: Color.fromARGB(255, 162, 169, 61),
                       padding: EdgeInsets.symmetric(horizontal: 16.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    child: Text('Add to Recipe List'),
+                    child: Text('Add Image'),
                   ),
-                ),
-              ],
+                  SizedBox(height: 20),
+                  Container(
+                    height: 150,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: _image != null
+                        ? Image.file(
+                            _image!,
+                            fit: BoxFit.cover,
+                          )
+                        : Center(
+                            child: Text('No Image Uploaded'),
+                          ),
+                  ),
+                  SizedBox(height: 20),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          if (_image == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text('Image is required'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                          } else {
+                            _addToRecipeList();
+                          }
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 53, 160, 56),
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      child: Text('Add to Recipe List'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

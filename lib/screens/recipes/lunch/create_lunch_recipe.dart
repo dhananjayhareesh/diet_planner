@@ -22,6 +22,7 @@ class _CreateRecipeState extends State<CreateRecipeLunch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.blue[200],
@@ -36,144 +37,157 @@ class _CreateRecipeState extends State<CreateRecipeLunch> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: Colors.grey),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: titleController,
-                      maxLength: 20,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Title is required';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Title',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                      ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.blue[100]!, Colors.white],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: Colors.grey),
                     ),
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: Colors.grey),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: ingredientsController,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Ingredients are required';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Ingredients',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                      ),
-                      maxLines: 3,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    border: Border.all(color: Colors.grey),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      controller: preparationController,
-                      decoration: InputDecoration(
-                        labelText: 'Preparation',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                      ),
-                      maxLines: 5,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      _getImage();
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 162, 169, 61),
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                  child: Text('Add Image'),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: 150,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: _image != null
-                      ? Image.file(
-                          _image!,
-                          fit: BoxFit.cover,
-                        )
-                      : Center(
-                          child: Text('No Image Uploaded'),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: titleController,
+                        maxLength: 20,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Title is required';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Title',
+                          border: InputBorder.none,
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 16.0),
                         ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Center(
-                  child: ElevatedButton(
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: Colors.grey),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: ingredientsController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Ingredients are required';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Ingredients',
+                          border: InputBorder.none,
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 16.0),
+                        ),
+                        maxLines: 3,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: Colors.grey),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: preparationController,
+                        decoration: InputDecoration(
+                          labelText: 'Preparation',
+                          border: InputBorder.none,
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 16.0),
+                        ),
+                        maxLines: 5,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
-                        if (_image == null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text('Image is required'),
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
-                        } else {
-                          _addToRecipeList();
-                        }
+                        _getImage();
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 53, 160, 56),
+                        backgroundColor: Color.fromARGB(255, 162, 169, 61),
                         padding: EdgeInsets.symmetric(horizontal: 16.0),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
-                    child: Text('Add to Recipe List'),
+                    child: Text('Add Image'),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 150,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: _image != null
+                        ? Image.file(
+                            _image!,
+                            fit: BoxFit.cover,
+                          )
+                        : Center(
+                            child: Text('No Image Uploaded'),
+                          ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          if (_image == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text('Image is required'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                          } else {
+                            _addToRecipeList();
+                          }
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 53, 160, 56),
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                      child: Text('Add to Recipe List'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

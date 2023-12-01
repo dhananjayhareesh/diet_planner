@@ -35,13 +35,20 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/userbg.jpg'),
-              fit: BoxFit.cover,
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.blue[100]!, Colors.white],
             ),
           ),
+          height: MediaQuery.of(context).size.height,
+          // decoration: BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage('assets/userbg.jpg'),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -87,7 +94,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
-                                  height: 50,
+                                  height: 60,
                                   width: double.infinity,
                                   child: TextFormField(
                                     controller: nameController,
@@ -114,11 +121,53 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                 const SizedBox(
                                   height: 30,
                                 ),
+                                SizedBox(
+                                  height: 60,
+                                  child: DropdownButtonFormField(
+                                    value: sexController.text.isNotEmpty
+                                        ? sexController.text
+                                        : null,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        sexController.text = value.toString();
+                                      });
+                                    },
+                                    items: ['Male', 'Female'].map((sex) {
+                                      return DropdownMenuItem(
+                                        value: sex,
+                                        child: Text(
+                                          sex,
+                                          style: TextStyle(fontSize: 14),
+                                        ),
+                                      );
+                                    }).toList(),
+                                    decoration: InputDecoration(
+                                      labelText: "Sex",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.black),
+                                      ),
+                                      errorText: errors['sex'],
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        setError(
+                                            'sex', 'Please select your sex');
+                                        return 'Please select your sex';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
                                 Row(
                                   children: [
                                     SizedBox(
-                                      height: 50,
-                                      width: 100,
+                                      height: 60,
+                                      width: 150,
                                       child: TextFormField(
                                         controller: ageController,
                                         onChanged: (_) => clearError('age'),
@@ -145,35 +194,8 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                     ),
                                     Spacer(),
                                     SizedBox(
-                                      height: 50,
-                                      width: 100,
-                                      child: TextFormField(
-                                        controller: sexController,
-                                        onChanged: (_) => clearError('sex'),
-                                        decoration: InputDecoration(
-                                          labelText: "Sex",
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            borderSide: const BorderSide(
-                                                color: Colors.black),
-                                          ),
-                                          errorText: errors['sex'],
-                                        ),
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            setError(
-                                                'sex', 'Please enter your sex');
-                                            return 'Please enter your sex';
-                                          }
-                                          return null;
-                                        },
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    SizedBox(
-                                      height: 50,
-                                      width: 100,
+                                      height: 60,
+                                      width: 150,
                                       child: TextFormField(
                                         controller: heightController,
                                         onChanged: (_) => clearError('height'),
@@ -264,52 +286,43 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 40,
+                                  height: 20,
                                 ),
-                                const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 110),
-                                  child: Text(
-                                    'ACTIVITY LEVEL',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                Text(
+                                  'ACTIVITY LEVEL',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 50, right: 50),
-                                  child: SizedBox(
-                                    height: 60,
-                                    width: double.infinity,
-                                    child: DropdownButtonFormField(
-                                      value: selectedActivityLevel,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          selectedActivityLevel =
-                                              value.toString();
-                                        });
-                                      },
-                                      items: activityLevels.map((level) {
-                                        return DropdownMenuItem(
-                                          value: level,
-                                          child: Text(
-                                            level,
-                                            style: TextStyle(fontSize: 15),
-                                          ),
-                                        );
-                                      }).toList(),
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                              color: Colors.black),
+                                SizedBox(
+                                  height: 60,
+                                  width: double.infinity,
+                                  child: DropdownButtonFormField(
+                                    value: selectedActivityLevel,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        selectedActivityLevel =
+                                            value.toString();
+                                      });
+                                    },
+                                    items: activityLevels.map((level) {
+                                      return DropdownMenuItem(
+                                        value: level,
+                                        child: Text(
+                                          level,
+                                          style: TextStyle(fontSize: 15),
                                         ),
+                                      );
+                                    }).toList(),
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.black),
                                       ),
                                     ),
                                   ),
@@ -317,53 +330,44 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                const Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 110),
-                                  child: Text(
-                                    'WEIGHT GOAL',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                Text(
+                                  'WEIGHT GOAL',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 50, right: 50),
-                                  child: SizedBox(
-                                    height: 60,
-                                    width: double.infinity,
-                                    child: DropdownButtonFormField(
-                                      value: selectedGoal,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          selectedGoal = value.toString();
-                                        });
-                                      },
-                                      items: [
-                                        'Maintain Weight',
-                                        'Lose Weight',
-                                        'Gain Weight'
-                                      ].map((goal) {
-                                        return DropdownMenuItem(
-                                          value: goal,
-                                          child: Text(
-                                            goal,
-                                            style: TextStyle(fontSize: 15),
-                                          ),
-                                        );
-                                      }).toList(),
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                              color: Colors.black),
+                                SizedBox(
+                                  height: 60,
+                                  width: double.infinity,
+                                  child: DropdownButtonFormField(
+                                    value: selectedGoal,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        selectedGoal = value.toString();
+                                      });
+                                    },
+                                    items: [
+                                      'Maintain Weight',
+                                      'Lose Weight',
+                                      'Gain Weight'
+                                    ].map((goal) {
+                                      return DropdownMenuItem(
+                                        value: goal,
+                                        child: Text(
+                                          goal,
+                                          style: TextStyle(fontSize: 15),
                                         ),
+                                      );
+                                    }).toList(),
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Colors.black),
                                       ),
                                     ),
                                   ),
@@ -503,7 +507,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
     }
 
     if (sexController.text.isEmpty) {
-      setError('sex', 'Enter sex');
+      setError('sex', 'Please select your sex');
       isValid = false;
     }
 

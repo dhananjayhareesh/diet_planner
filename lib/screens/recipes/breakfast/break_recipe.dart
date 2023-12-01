@@ -69,7 +69,7 @@ class _BreakRecipeState extends State<BreakRecipe> {
                       width: 160,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
+                        color: Colors.white54,
                       ),
                       child: Column(
                         children: [
