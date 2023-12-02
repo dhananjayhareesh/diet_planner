@@ -34,22 +34,22 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.blue[100]!, Colors.white],
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.blue[100]!, Colors.white],
+              ),
             ),
-          ),
-          height: MediaQuery.of(context).size.height,
-          // decoration: BoxDecoration(
-          //   image: DecorationImage(
-          //     image: AssetImage('assets/userbg.jpg'),
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
-          child: SingleChildScrollView(
+            height: MediaQuery.of(context).size.height,
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //     image: AssetImage('assets/userbg.jpg'),
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
             child: Column(
               children: [
                 Column(

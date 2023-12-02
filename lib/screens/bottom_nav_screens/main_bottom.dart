@@ -13,10 +13,10 @@ class MainBottom extends StatefulWidget {
 
 class _MainButtomState extends State<MainBottom> {
   int myCurrentIndex = 0;
-  final List<Widget> pages = const [
+  final List<Widget> pages = [
     HomeScreen(),
     ScreenDiary(),
-    ScreenProgress(),
+    GoalTrackerScreen(),
     ScreenRecipes(),
   ];
   @override
@@ -61,7 +61,7 @@ class _MainButtomState extends State<MainBottom> {
                       height: 30,
                       width: 30,
                       child: Image.asset('assets/success.png')),
-                  label: 'Progress'),
+                  label: 'Goal'),
               BottomNavigationBarItem(
                   icon: Container(
                       height: 30,

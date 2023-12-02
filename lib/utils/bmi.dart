@@ -17,7 +17,7 @@ class _BmiScreenState extends State<BmiScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blue[100],
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         centerTitle: true,
@@ -33,104 +33,113 @@ class _BmiScreenState extends State<BmiScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/bmi.avif',
-                height: 100,
-              ),
-              SizedBox(height: 16.0),
-              Row(
-                children: [
-                  Text('Select Gender: '),
-                  DropdownButton<String>(
-                    value: selectedGender,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedGender = newValue!;
-                      });
-                    },
-                    style: TextStyle(color: Colors.blue),
-                    icon: Icon(Icons.arrow_drop_down, color: Colors.blue),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.blue,
-                    ),
-                    items: ['Male', 'Female'].map<DropdownMenuItem<String>>(
-                      (String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(
-                            value,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        );
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.bottomLeft,
+              colors: [Colors.white, Colors.blue[100]!],
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/bmi.avif',
+                  height: 100,
+                ),
+                SizedBox(height: 16.0),
+                Row(
+                  children: [
+                    Text('Select Gender: '),
+                    DropdownButton<String>(
+                      value: selectedGender,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedGender = newValue!;
+                        });
                       },
-                    ).toList(),
+                      style: TextStyle(color: Colors.blue),
+                      icon: Icon(Icons.arrow_drop_down, color: Colors.blue),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.blue,
+                      ),
+                      items: ['Male', 'Female'].map<DropdownMenuItem<String>>(
+                        (String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          );
+                        },
+                      ).toList(),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16.0),
+                TextField(
+                  controller: weightController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Enter your weight (kg)',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 16.0),
+                TextField(
+                  controller: heightController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Enter your height (cm)',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                SizedBox(height: 16.0),
+                ElevatedButton(
+                  onPressed: () {
+                    calculateBMI();
+                  },
+                  child: Text('Calculate BMI'),
+                ),
+                SizedBox(height: 16.0),
+                Text(
+                  'BMI: ${bmiResult.toStringAsFixed(2)}',
+                  style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: getColorForBMI(bmiResult)),
+                ),
+                SizedBox(height: 16.0),
+                Text(
+                  'Result: $resultStatus',
+                  style: TextStyle(
+                      fontSize: 18.0, color: getColorForBMI(bmiResult)),
+                ),
+                SizedBox(height: 16.0),
+                if (bmiResult >= 18.5 && bmiResult < 24.9) ...[
+                  Text(
+                    'Your current weight is within the normal range for BMI.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.black,
+                    ),
+                  ),
+                ] else ...[
+                  Text(
+                    'To achieve a normal weight, consider maintaining weight within the range of BMI 18.5 to 24.9.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18.0, color: Colors.black),
                   ),
                 ],
-              ),
-              SizedBox(height: 16.0),
-              TextField(
-                controller: weightController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Enter your weight (kg)',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 16.0),
-              TextField(
-                controller: heightController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Enter your height (cm)',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () {
-                  calculateBMI();
-                },
-                child: Text('Calculate BMI'),
-              ),
-              SizedBox(height: 16.0),
-              Text(
-                'BMI: ${bmiResult.toStringAsFixed(2)}',
-                style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                    color: getColorForBMI(bmiResult)),
-              ),
-              SizedBox(height: 16.0),
-              Text(
-                'Result: $resultStatus',
-                style:
-                    TextStyle(fontSize: 18.0, color: getColorForBMI(bmiResult)),
-              ),
-              SizedBox(height: 16.0),
-              if (bmiResult >= 18.5 && bmiResult < 24.9) ...[
-                Text(
-                  'Your current weight is within the normal range for BMI.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.black,
-                  ),
-                ),
-              ] else ...[
-                Text(
-                  'To achieve a normal weight, consider maintaining weight within the range of BMI 18.5 to 24.9.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18.0, color: Colors.black),
-                ),
               ],
-            ],
+            ),
           ),
         ),
       ),
