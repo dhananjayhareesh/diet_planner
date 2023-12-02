@@ -18,6 +18,7 @@ class _ScreenDiaryState extends State<ScreenDiary> {
       appBar: AppBar(
         title: Text('Your Diary'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         flexibleSpace: Container(
           decoration: BoxDecoration(

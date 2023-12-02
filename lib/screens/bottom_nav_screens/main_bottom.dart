@@ -52,20 +52,20 @@ class _MainButtomState extends State<MainBottom> {
                   label: 'Dashboard'),
               BottomNavigationBarItem(
                   icon: Container(
-                      height: 30,
-                      width: 30,
+                      height: 32,
+                      width: 32,
                       child: Image.asset('assets/diary.png')),
                   label: 'Diary'),
               BottomNavigationBarItem(
                   icon: Container(
-                      height: 30,
-                      width: 30,
+                      height: 32,
+                      width: 32,
                       child: Image.asset('assets/success.png')),
                   label: 'Goal'),
               BottomNavigationBarItem(
                   icon: Container(
-                      height: 30,
-                      width: 30,
+                      height: 32,
+                      width: 32,
                       child: Image.asset('assets/recipes.png')),
                   label: 'Recipes'),
             ],

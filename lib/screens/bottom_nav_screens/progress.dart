@@ -27,7 +27,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[100],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Goal Tracker'),
         flexibleSpace: Container(
@@ -40,6 +40,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
           ),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -63,12 +64,11 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
                 SizedBox(height: 16),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.blue[900],
-                    onPrimary: Colors.white,
+                    backgroundColor: Colors.blue[600],
                     textStyle: TextStyle(fontSize: 16),
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                   onPressed: () => _showAddGoalDialog(context),
@@ -77,12 +77,11 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
                 SizedBox(height: 16),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.blue[900],
-                    onPrimary: Colors.white,
+                    backgroundColor: Colors.blue[600],
                     textStyle: TextStyle(fontSize: 16),
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                   onPressed: () => _showAddProgressDialog(context),
@@ -102,7 +101,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
       child: Text(
         title,
         style: TextStyle(
-            fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
+            fontSize: 25, fontWeight: FontWeight.bold, color: Colors.blue[900]),
       ),
     );
   }
@@ -111,7 +110,16 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.blue[200]!,
+            Colors.blue[100]!,
+            Colors.white,
+            Colors.white,
+          ],
+        ),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -126,38 +134,170 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
         valueListenable: Hive.box<UserGoal>('goals').listenable(),
         builder: (context, Box<UserGoal> box, _) {
           List<UserGoal> goals = box.values.toList();
-          return Column(
-            children: goals
-                .map(
-                  (goal) => Card(
-                    elevation: 2,
-                    margin: EdgeInsets.symmetric(vertical: 8),
-                    color: Colors.blue[50],
-                    child: ListTile(
-                      title: Text(
-                        goal.title,
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(
-                        'Target: ${goal.targetValue} ${goal.unit}',
-                        style: TextStyle(fontSize: 14, color: Colors.grey[700]),
-                      ),
-                    ),
+          return goals.isEmpty
+              ? Center(
+                  child: Text(
+                    'No goals set yet. Start setting your goals now!',
+                    style: TextStyle(fontSize: 16),
                   ),
                 )
-                .toList(),
-          );
+              : Column(
+                  children: goals
+                      .map(
+                        (goal) => Card(
+                          elevation: 2,
+                          margin: EdgeInsets.symmetric(vertical: 8),
+                          color: Colors.blue[50],
+                          child: ListTile(
+                            title: Text(
+                              goal.title,
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: Text(
+                              'Target: ${goal.targetValue} ${goal.unit}',
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.grey[700]),
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.edit),
+                                  onPressed: () =>
+                                      _showEditGoalDialog(context, goal),
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () => _deleteGoal(goal),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                );
         },
       ),
     );
+  }
+
+  void _showEditGoalDialog(BuildContext context, UserGoal goal) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title:
+              Text('Edit Goal', style: TextStyle(fontWeight: FontWeight.bold)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                decoration: InputDecoration(labelText: 'Goal Title'),
+                controller: TextEditingController(text: goal.title),
+                onChanged: (value) {
+                  setState(() {
+                    newGoalTitle = value;
+                  });
+                },
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Target Value'),
+                keyboardType: TextInputType.number,
+                controller:
+                    TextEditingController(text: goal.targetValue.toString()),
+                onChanged: (value) {
+                  setState(() {
+                    newGoalTargetValue = double.parse(value);
+                  });
+                },
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Unit'),
+                controller: TextEditingController(text: goal.unit),
+                onChanged: (value) {
+                  setState(() {
+                    newGoalUnit = value;
+                  });
+                },
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                _editGoal(goal);
+                Navigator.of(context).pop();
+              },
+              child: Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _editGoal(UserGoal goal) {
+    // Implement the logic to edit the goal in the Hive box
+    goal.title = newGoalTitle;
+    goal.targetValue = newGoalTargetValue;
+    goal.unit = newGoalUnit;
+    goal.save();
+  }
+
+  void _deleteGoal(UserGoal goal) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete Goal'),
+          content: Text('Have you achieved your goal?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('No'),
+            ),
+            TextButton(
+              onPressed: () {
+                _confirmDeleteGoal(goal);
+                Navigator.of(context).pop();
+              },
+              child: Text('Yes'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _confirmDeleteGoal(UserGoal goal) {
+    // Implement the logic to delete the goal from the Hive box
+    goalsBox.delete(goal.key);
   }
 
   Widget _buildProgressContainer() {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.blue[200]!,
+            Colors.blue[100]!,
+            Colors.white,
+            Colors.white,
+          ],
+        ),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -172,30 +312,74 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
         valueListenable: Hive.box<UserProgress>('progress').listenable(),
         builder: (context, Box<UserProgress> box, _) {
           List<UserProgress> progressList = box.values.toList();
-          return Column(
-            children: progressList
-                .map(
-                  (progress) => Card(
-                    elevation: 2,
-                    margin: EdgeInsets.symmetric(vertical: 8),
-                    color: Colors.blue[50],
-                    child: ListTile(
-                      title: Text(
-                        'Progress on ${_formatDate(progress.date)}',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      subtitle: Text(
-                        'Achieved: ${progress.achievedValue}',
-                        style: TextStyle(fontSize: 14, color: Colors.grey[700]),
-                      ),
-                    ),
+          return progressList.isEmpty
+              ? Center(
+                  child: Text(
+                    'No progress logged yet. Keep working towards your goals!',
+                    style: TextStyle(fontSize: 16),
                   ),
                 )
-                .toList(),
-          );
+              : Column(
+                  children: progressList
+                      .map(
+                        (progress) => Card(
+                          elevation: 2,
+                          margin: EdgeInsets.symmetric(vertical: 8),
+                          color: Colors.blue[50],
+                          child: ListTile(
+                            title: Text(
+                              'Progress on ${_formatDate(progress.date)}',
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            subtitle: Text(
+                              'Achieved: ${progress.achievedValue}',
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.grey[700]),
+                            ),
+                            trailing: IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () => _deleteProgress(progress),
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                );
         },
       ),
     );
+  }
+
+  void _deleteProgress(UserProgress progress) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete Progress'),
+          content: Text('Are you sure you want to delete this progress entry?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('No'),
+            ),
+            TextButton(
+              onPressed: () {
+                _confirmDeleteProgress(progress);
+                Navigator.of(context).pop();
+              },
+              child: Text('Yes'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _confirmDeleteProgress(UserProgress progress) {
+    // Implement the logic to delete the progress entry from the Hive box
+    progressBox.delete(progress.key);
   }
 
   String _formatDate(DateTime date) {

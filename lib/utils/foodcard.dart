@@ -161,7 +161,7 @@ class FoodCard extends StatelessWidget {
                   width: 30,
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 30,
                   width: 30,
                   child: GestureDetector(
                     onTap: () {
@@ -209,7 +209,7 @@ class FoodCard extends StatelessWidget {
                   width: 60,
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 30,
                   width: 30,
                   child: GestureDetector(
                     onTap: () {
@@ -257,7 +257,7 @@ class FoodCard extends StatelessWidget {
                   width: 50,
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 30,
                   width: 30,
                   child: GestureDetector(
                     onTap: () {
@@ -305,7 +305,7 @@ class FoodCard extends StatelessWidget {
                   width: 55,
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 30,
                   width: 30,
                   child: GestureDetector(
                     onTap: () {

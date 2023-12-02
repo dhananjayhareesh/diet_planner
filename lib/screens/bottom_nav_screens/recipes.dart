@@ -12,6 +12,7 @@ class ScreenRecipes extends StatelessWidget {
       appBar: AppBar(
         title: Text('My Recipes'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         flexibleSpace: Container(
           decoration: BoxDecoration(

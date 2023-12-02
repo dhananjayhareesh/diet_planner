@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dietplanner_project/database/db_breakrecipe.dart';
+import 'package:dietplanner_project/screens/recipes/breakfast/edit_breakrecipe.dart';
 import 'package:flutter/material.dart';
 
 class RecipeDetails extends StatelessWidget {
@@ -27,7 +28,14 @@ class RecipeDetails extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RecipeEdit(recipe: recipe),
+                ),
+              );
+            },
             icon: const Icon(Icons.edit),
           )
         ],
