@@ -1,4 +1,4 @@
-import 'package:dietplanner_project/utils/add_food.dart';
+import 'package:dietplanner_project/screens/homescreens/food_screens/add_food.dart';
 
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dietplanner_project/database/db_model.dart';
-import 'package:dietplanner_project/utils/edit_details.dart';
+import 'package:dietplanner_project/screens/user_details_screens/edit_details.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class UserPage extends StatefulWidget {

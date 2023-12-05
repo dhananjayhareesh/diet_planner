@@ -12,7 +12,7 @@ class ScreenSplashThree extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.green[100]!, Colors.blue[200]!],
+            colors: [Colors.blue[200]!, Colors.blue[800]!],
           ),
         ),
         child: Column(

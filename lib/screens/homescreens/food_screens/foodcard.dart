@@ -1,6 +1,6 @@
 import 'package:dietplanner_project/database/db_waterintake.dart';
-import 'package:dietplanner_project/utils/bmi.dart';
-import 'package:dietplanner_project/utils/selected_food.dart';
+import 'package:dietplanner_project/screens/homescreens/bmi.dart';
+import 'package:dietplanner_project/screens/homescreens/food_screens/selected_food.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 

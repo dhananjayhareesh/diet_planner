@@ -1,7 +1,7 @@
 import 'package:dietplanner_project/screens/bottom_nav_screens/diary.dart';
 import 'package:dietplanner_project/screens/bottom_nav_screens/progress.dart';
 import 'package:dietplanner_project/screens/bottom_nav_screens/recipes.dart';
-import 'package:dietplanner_project/screens/home_screen.dart';
+import 'package:dietplanner_project/screens/homescreens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainBottom extends StatefulWidget {

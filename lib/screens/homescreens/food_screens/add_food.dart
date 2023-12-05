@@ -1,7 +1,7 @@
 import 'package:dietplanner_project/database/model_food.dart';
 import 'package:dietplanner_project/database/model_selected_food.dart';
 import 'package:dietplanner_project/database/model_totalcalories.dart';
-import 'package:dietplanner_project/utils/search.dart';
+import 'package:dietplanner_project/screens/homescreens/food_screens/search.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';

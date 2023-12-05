@@ -13,13 +13,13 @@ class ScreenSplashFour extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.green[100]!, Colors.blue[200]!],
+            colors: [Colors.blue[200]!, Colors.blue[800]!],
           ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Lottie.asset('assets/Animation - 1698384804398.json'),
+            Lottie.asset('assets/Animation - 1701754262001.json'),
             SizedBox(height: 50),
             Text(
               "Start your journey to better health through a well-balanced, healthy diet.",

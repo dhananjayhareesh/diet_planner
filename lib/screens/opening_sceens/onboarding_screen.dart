@@ -41,21 +41,25 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             child: SmoothPageIndicator(
               controller: _controller,
               count: 4,
-              effect: WormEffect(),
+              effect: SwapEffect(),
             ),
           ),
-          Positioned(
-            top: 70.0,
-            right: 20.0,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return ScreenUserDetails();
-                }));
-              },
-              child: Text('Skip'),
+          if (!onLastPage)
+            Positioned(
+              top: 70.0,
+              right: 20.0,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ScreenUserDetails();
+                  }));
+                },
+                child: Text(
+                  'Skip',
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              ),
             ),
-          ),
         ],
       ),
     );

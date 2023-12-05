@@ -131,6 +131,8 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                       setState(() {
                                         sexController.text = value.toString();
                                       });
+                                      clearError(
+                                          'sex'); // Clear error when a value is selected
                                     },
                                     items: ['Male', 'Female'].map((sex) {
                                       return DropdownMenuItem(

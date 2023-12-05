@@ -1,7 +1,7 @@
 import 'package:dietplanner_project/database/db_model.dart';
 import 'package:dietplanner_project/database/model_totalcalories.dart';
-import 'package:dietplanner_project/utils/foodcard.dart';
-import 'package:dietplanner_project/utils/user_page.dart';
+import 'package:dietplanner_project/screens/homescreens/food_screens/foodcard.dart';
+import 'package:dietplanner_project/screens/user_details_screens/user_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -34,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Add a listener to the Hive box to update total calories when it changes
     totalCaloriesBox.listenable().addListener(_onTotalCaloriesChanged);
+    //reset to 0
+    updateTotalCalories();
   }
 
   // Callback function for total calories changes
@@ -45,6 +47,21 @@ class _HomeScreenState extends State<HomeScreen> {
               ?.total ??
           0;
     });
+  }
+
+  void updateTotalCalories() {
+    String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+    if (!totalCaloriesBox.containsKey(currentDate)) {
+      // It's a new day, reset total calories
+      totalCalories = 0;
+
+      // Update the CircularPercentIndicator widget, possibly using setState
+      // Example: totalCaloriesPercent = 0.0; (you'll need to define totalCaloriesPercent)
+      // setState(() {
+      //   totalCaloriesPercent = 0.0;
+      // });
+    }
   }
 
   @override

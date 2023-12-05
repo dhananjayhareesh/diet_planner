@@ -1,5 +1,5 @@
 import 'package:dietplanner_project/database/model_food.dart';
-import 'package:dietplanner_project/utils/updated_addfood.dart';
+import 'package:dietplanner_project/screens/homescreens/food_screens/updated_addfood.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
