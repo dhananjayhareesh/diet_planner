@@ -43,7 +43,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                 colors: [Colors.blue[100]!, Colors.white],
               ),
             ),
-            height: MediaQuery.of(context).size.height,
+
             // decoration: BoxDecoration(
             //   image: DecorationImage(
             //     image: AssetImage('assets/userbg.jpg'),
@@ -380,61 +380,65 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                 Center(
                                   child: SizedBox(
                                     width: 250,
-                                    height: 50,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        if (validateForm()) {
-                                          var user = UserModel()
-                                            ..name = nameController.text
-                                            ..age =
-                                                int.parse(ageController.text)
-                                            ..sex = sexController.text
-                                            ..height = double.parse(
-                                                heightController.text)
-                                            ..weight = double.parse(
-                                                weightController.text)
-                                            ..targetWeight = double.parse(
-                                                targetWeightController.text)
-                                            ..activityLevel =
-                                                selectedActivityLevel
-                                            ..goal = selectedGoal;
+                                    height: 60,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          if (validateForm()) {
+                                            var user = UserModel()
+                                              ..name = nameController.text
+                                              ..age =
+                                                  int.parse(ageController.text)
+                                              ..sex = sexController.text
+                                              ..height = double.parse(
+                                                  heightController.text)
+                                              ..weight = double.parse(
+                                                  weightController.text)
+                                              ..targetWeight = double.parse(
+                                                  targetWeightController.text)
+                                              ..activityLevel =
+                                                  selectedActivityLevel
+                                              ..goal = selectedGoal;
 
-                                          user.calorieBudget =
-                                              calculateCalorieBudget(
-                                            user.weight,
-                                            user.height,
-                                            user.targetWeight,
-                                            user.age,
-                                            user.sex,
-                                            user.activityLevel,
-                                            user.goal,
-                                          );
+                                            user.calorieBudget =
+                                                calculateCalorieBudget(
+                                              user.weight,
+                                              user.height,
+                                              user.targetWeight,
+                                              user.age,
+                                              user.sex,
+                                              user.activityLevel,
+                                              user.goal,
+                                            );
 
-                                          userBox.put('user', user);
-                                          print('User data saved to Hive');
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) {
-                                                return CalorieBudget(
-                                                  user: user,
-                                                );
-                                              },
-                                            ),
-                                          );
-                                        }
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 4, 63, 111),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25),
+                                            userBox.put('user', user);
+                                            print('User data saved to Hive');
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) {
+                                                  return CalorieBudget(
+                                                    user: user,
+                                                  );
+                                                },
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color.fromARGB(
+                                              255, 4, 63, 111),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
                                         ),
-                                      ),
-                                      child: const Text(
-                                        'Continue',
-                                        style: TextStyle(fontSize: 20),
+                                        child: const Text(
+                                          'Continue',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
                                       ),
                                     ),
                                   ),

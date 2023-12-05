@@ -255,7 +255,7 @@ class _TabFoodState extends State<TabFood> {
             });
           }
         },
-        label: Text('Add Food'),
+        label: Text('Food'),
         icon: Icon(Icons.add),
       ),
     );

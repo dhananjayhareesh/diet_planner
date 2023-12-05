@@ -9,6 +9,7 @@ import 'package:dietplanner_project/database/model_selected_food.dart';
 import 'package:dietplanner_project/database/model_totalcalories.dart';
 import 'package:dietplanner_project/screens/opening_sceens/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 
 void main() async {
@@ -33,6 +34,7 @@ void main() async {
   await Hive.openBox<WaterIntakeModel>('waterbox');
   await Hive.openBox<UserGoal>('goals');
   await Hive.openBox<UserProgress>('progress');
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MyApp());
 }
 

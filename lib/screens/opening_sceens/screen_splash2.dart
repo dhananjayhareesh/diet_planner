@@ -22,11 +22,13 @@ class ScreenSplashTwo extends StatelessWidget {
             SizedBox(height: 50),
             Text(
               "Customize your diet effortlessly.",
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
             Text(
               ' Plan your meals to meet your nutritional goals.',
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
           ],

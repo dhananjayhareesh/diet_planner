@@ -27,6 +27,7 @@ class ScreenSplashOne extends StatelessWidget {
             SizedBox(height: 20),
             Text(
               'Where a healthier you begins with every meal.',
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
           ],

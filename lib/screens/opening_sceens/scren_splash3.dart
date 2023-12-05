@@ -22,11 +22,13 @@ class ScreenSplashThree extends StatelessWidget {
             SizedBox(height: 50),
             Text(
               "Create and save your own recipes.",
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
             Text(
               'Keep your favorite dishes just a tap away.',
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),
             ),
           ],

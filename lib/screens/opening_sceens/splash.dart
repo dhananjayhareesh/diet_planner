@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:dietplanner_project/screens/opening_sceens/onboarding_screen.dart';
+import 'package:dietplanner_project/screens/bottom_nav_screens/main_bottom.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -11,13 +13,34 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    checkFinishButtonClicked();
+  }
 
-    Timer(Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => OnBoardScreen()),
-      );
-    });
+  Future<void> checkFinishButtonClicked() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool finishButtonClicked = prefs.getBool('finishButtonClicked') ?? false;
+
+    if (finishButtonClicked) {
+      navigateToMainBottom();
+    } else {
+      Timer(Duration(seconds: 3), () {
+        navigateToOnBoardScreen();
+      });
+    }
+  }
+
+  void navigateToOnBoardScreen() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => OnBoardScreen()),
+    );
+  }
+
+  void navigateToMainBottom() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => MainBottom()),
+    );
   }
 
   @override
@@ -48,10 +71,12 @@ class _SplashScreenState extends State<SplashScreen> {
             height: 100,
           ),
           Center(
-              child: SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: Image.asset('assets/appicon.png'))),
+            child: SizedBox(
+              height: 100,
+              width: 100,
+              child: Image.asset('assets/appicon.png'),
+            ),
+          ),
         ],
       ),
     );

@@ -1,10 +1,17 @@
 import 'package:dietplanner_project/database/db_model.dart';
 import 'package:dietplanner_project/screens/bottom_nav_screens/main_bottom.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CalorieBudget extends StatelessWidget {
   final UserModel user;
+
   const CalorieBudget({Key? key, required this.user}) : super(key: key);
+
+  Future<void> markFinishButtonClicked() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('finishButtonClicked', true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +32,10 @@ class CalorieBudget extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 30),
                   child: SizedBox(
-                      height: 300,
-                      width: 300,
-                      child: Image.asset('assets/budget.jpg')),
+                    height: 300,
+                    width: 300,
+                    child: Image.asset('assets/budget.jpg'),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -56,21 +64,28 @@ class CalorieBudget extends StatelessWidget {
               ),
               SizedBox(
                 width: 250,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const MainBottom();
-                    }));
-                  },
-                  style: ElevatedButton.styleFrom(
+                height: 60,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      await markFinishButtonClicked();
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainBottom()),
+                        (route) => false,
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 4, 63, 111),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25))),
-                  child: const Text(
-                    'Finish',
-                    style: TextStyle(fontSize: 20),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                    child: const Text(
+                      'Finish',
+                      style: TextStyle(fontSize: 20),
+                    ),
                   ),
                 ),
               )
