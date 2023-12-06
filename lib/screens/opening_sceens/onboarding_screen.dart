@@ -14,7 +14,7 @@ class OnBoardScreen extends StatefulWidget {
 }
 
 class _OnBoardScreenState extends State<OnBoardScreen> {
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
   bool onLastPage = false;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                 onLastPage = (index == 3);
               });
             },
-            children: [
+            children: const [
               ScreenSplashOne(),
               ScreenSplashTwo(),
               ScreenSplashThree(),
@@ -41,7 +41,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             child: SmoothPageIndicator(
               controller: _controller,
               count: 4,
-              effect: SwapEffect(),
+              effect: const SwapEffect(),
             ),
           ),
           if (!onLastPage)
@@ -51,10 +51,10 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ScreenUserDetails();
+                    return const ScreenUserDetails();
                   }));
                 },
-                child: Text(
+                child: const Text(
                   'Skip',
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),

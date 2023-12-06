@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _SplashScreenState createState() => _SplashScreenState();
 }
 
@@ -23,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (finishButtonClicked) {
       navigateToMainBottom();
     } else {
-      Timer(Duration(seconds: 3), () {
+      Timer(const Duration(seconds: 3), () {
         navigateToOnBoardScreen();
       });
     }
@@ -32,14 +35,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigateToOnBoardScreen() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => OnBoardScreen()),
+      MaterialPageRoute(builder: (context) => const OnBoardScreen()),
     );
   }
 
   void navigateToMainBottom() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => MainBottom()),
+      MaterialPageRoute(builder: (context) => const MainBottom()),
     );
   }
 
@@ -51,14 +54,14 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'HAPPY DIET.',
             style: TextStyle(color: Colors.white, fontSize: 30),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          Row(
+          const Row(
             children: [
               SizedBox(width: 170),
               Text(
@@ -67,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 100,
           ),
           Center(

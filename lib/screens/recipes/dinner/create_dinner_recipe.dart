@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:dietplanner_project/database/db_dinnerrecipe.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -8,6 +10,7 @@ class CreateRecipeDinner extends StatefulWidget {
   const CreateRecipeDinner({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _CreateRecipeState createState() => _CreateRecipeState();
 }
 
@@ -26,7 +29,7 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.blue[200],
-        title: Text('Create Dinner Recipe'),
+        title: const Text('Create Dinner Recipe'),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -69,7 +72,7 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
                           }
                           return null;
                         },
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Title',
                           border: InputBorder.none,
                           contentPadding:
@@ -78,7 +81,7 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
@@ -94,7 +97,7 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
                           }
                           return null;
                         },
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Ingredients',
                           border: InputBorder.none,
                           contentPadding:
@@ -104,7 +107,7 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
@@ -114,7 +117,7 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
                         controller: preparationController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Preparation',
                           border: InputBorder.none,
                           contentPadding:
@@ -124,7 +127,7 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
@@ -132,13 +135,14 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 162, 169, 61),
-                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        backgroundColor:
+                            const Color.fromARGB(255, 162, 169, 61),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20))),
-                    child: Text('Add Image'),
+                    child: const Text('Add Image'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -153,11 +157,11 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
                             _image!,
                             fit: BoxFit.cover,
                           )
-                        : Center(
+                        : const Center(
                             child: Text('No Image Uploaded'),
                           ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Center(
@@ -166,7 +170,7 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
                         if (_formKey.currentState?.validate() ?? false) {
                           if (_image == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 backgroundColor: Colors.red,
                                 content: Text('Image is required'),
                                 duration: Duration(seconds: 2),
@@ -180,10 +184,10 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor:
                               const Color.fromARGB(255, 53, 160, 56),
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20))),
-                      child: Text('Add to Recipe List'),
+                      child: const Text('Add to Recipe List'),
                     ),
                   ),
                 ],
@@ -219,13 +223,11 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
 
     recipeBox.add(newRecipe);
 
-    print('Data stored');
-
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: Colors.blue[300],
         content: Text('New Recipe Added: ${newRecipe.title}'),
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
 

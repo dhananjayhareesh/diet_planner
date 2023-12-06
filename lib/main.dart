@@ -35,7 +35,7 @@ void main() async {
   await Hive.openBox<UserGoal>('goals');
   await Hive.openBox<UserProgress>('progress');
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

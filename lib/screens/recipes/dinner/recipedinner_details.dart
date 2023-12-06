@@ -13,7 +13,7 @@ class RecipeDetailsDinner extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('My Dinner Recipes'),
+        title: const Text('My Dinner Recipes'),
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         centerTitle: true,
         flexibleSpace: Container(
@@ -63,11 +63,11 @@ class RecipeDetailsDinner extends StatelessWidget {
                   child: Center(
                     child: Text(
                       recipe.title,
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Container(
@@ -81,20 +81,24 @@ class RecipeDetailsDinner extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Container(
                   width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           'Ingredients',
                           style: TextStyle(fontSize: 20),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
@@ -104,25 +108,25 @@ class RecipeDetailsDinner extends StatelessWidget {
                       ],
                     ),
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Container(
                   width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           'Preparation',
                           style: TextStyle(fontSize: 20),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
@@ -131,10 +135,6 @@ class RecipeDetailsDinner extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ],

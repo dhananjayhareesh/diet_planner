@@ -14,22 +14,22 @@ class MainBottom extends StatefulWidget {
 class _MainButtomState extends State<MainBottom> {
   int myCurrentIndex = 0;
   final List<Widget> pages = [
-    HomeScreen(),
-    ScreenDiary(),
-    GoalTrackerScreen(),
-    ScreenRecipes(),
+    const HomeScreen(),
+    const ScreenDiary(),
+    const GoalTrackerScreen(),
+    const ScreenRecipes(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: pages[myCurrentIndex],
       bottomNavigationBar: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
               color: Colors.black.withOpacity(0.5),
               blurRadius: 25,
-              offset: Offset(8, 20)),
+              offset: const Offset(8, 20)),
         ]),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30),
@@ -45,25 +45,25 @@ class _MainButtomState extends State<MainBottom> {
             },
             items: [
               BottomNavigationBarItem(
-                  icon: Container(
+                  icon: SizedBox(
                       height: 30,
                       width: 30,
                       child: Image.asset('assets/dashboard.png')),
                   label: 'Dashboard'),
               BottomNavigationBarItem(
-                  icon: Container(
+                  icon: SizedBox(
                       height: 32,
                       width: 32,
                       child: Image.asset('assets/diary.png')),
                   label: 'Diary'),
               BottomNavigationBarItem(
-                  icon: Container(
+                  icon: SizedBox(
                       height: 32,
                       width: 32,
                       child: Image.asset('assets/success.png')),
                   label: 'Goal'),
               BottomNavigationBarItem(
-                  icon: Container(
+                  icon: SizedBox(
                       height: 32,
                       width: 32,
                       child: Image.asset('assets/recipes.png')),

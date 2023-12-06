@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class ScreenUserDetails extends StatefulWidget {
-  ScreenUserDetails({Key? key}) : super(key: key);
+  const ScreenUserDetails({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ScreenUserDetailsState createState() => _ScreenUserDetailsState();
 }
 
@@ -139,7 +140,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                         value: sex,
                                         child: Text(
                                           sex,
-                                          style: TextStyle(fontSize: 14),
+                                          style: const TextStyle(fontSize: 14),
                                         ),
                                       );
                                     }).toList(),
@@ -162,7 +163,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                     },
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 30,
                                 ),
                                 Row(
@@ -194,7 +195,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                         },
                                       ),
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     SizedBox(
                                       height: 60,
                                       width: 150,
@@ -256,7 +257,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                         },
                                       ),
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     SizedBox(
                                       height: 50,
                                       width: 150,
@@ -287,10 +288,10 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
-                                Text(
+                                const Text(
                                   'ACTIVITY LEVEL',
                                   style: TextStyle(
                                     fontSize: 16,
@@ -316,7 +317,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                         value: level,
                                         child: Text(
                                           level,
-                                          style: TextStyle(fontSize: 15),
+                                          style: const TextStyle(fontSize: 15),
                                         ),
                                       );
                                     }).toList(),
@@ -332,7 +333,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                Text(
+                                const Text(
                                   'WEIGHT GOAL',
                                   style: TextStyle(
                                     fontSize: 16,
@@ -361,7 +362,7 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                         value: goal,
                                         child: Text(
                                           goal,
-                                          style: TextStyle(fontSize: 15),
+                                          style: const TextStyle(fontSize: 15),
                                         ),
                                       );
                                     }).toList(),
@@ -414,7 +415,6 @@ class _ScreenUserDetailsState extends State<ScreenUserDetails> {
                                             );
 
                                             userBox.put('user', user);
-                                            print('User data saved to Hive');
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(

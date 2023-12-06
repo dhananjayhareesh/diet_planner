@@ -4,13 +4,14 @@ import 'package:dietplanner_project/screens/recipes/lunch/lunch_recipe.dart';
 import 'package:flutter/material.dart';
 
 class ScreenRecipes extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   const ScreenRecipes({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Recipes'),
+        title: const Text('My Recipes'),
         centerTitle: true,
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
@@ -44,14 +45,16 @@ class ScreenRecipes extends StatelessWidget {
                   () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => BreakRecipe()),
+                      MaterialPageRoute(
+                          builder: (context) => const BreakRecipe()),
                     );
                   },
                 ),
                 buildRecipeCategoryCard('LUNCH', 'assets/recipelunch.jpg', () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LunchRecipe()),
+                    MaterialPageRoute(
+                        builder: (context) => const LunchRecipe()),
                   );
                 }),
                 buildRecipeCategoryCard(
@@ -60,7 +63,8 @@ class ScreenRecipes extends StatelessWidget {
                   () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DinnerRecipe()),
+                      MaterialPageRoute(
+                          builder: (context) => const DinnerRecipe()),
                     );
                   },
                 ),
@@ -100,9 +104,9 @@ class ScreenRecipes extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(20.0),
                   bottomRight: Radius.circular(20.0),
                 ),
@@ -110,7 +114,7 @@ class ScreenRecipes extends StatelessWidget {
               ),
               child: Text(
                 category,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

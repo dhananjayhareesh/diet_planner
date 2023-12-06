@@ -8,6 +8,7 @@ class WaterTracker extends StatefulWidget {
   const WaterTracker({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _WaterTrackerState createState() => _WaterTrackerState();
 }
 
@@ -54,10 +55,10 @@ class _WaterTrackerState extends State<WaterTracker> {
               width: 100,
               child: Image.asset('assets/water.jpg'),
             ),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(right: 35),
-              child: const Text(
+            const Spacer(),
+            const Padding(
+              padding: EdgeInsets.only(right: 35),
+              child: Text(
                 'Track Your Water\nIntake',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -71,9 +72,10 @@ class _WaterTrackerState extends State<WaterTracker> {
             children: [
               Text(
                 '$glassesConsumed glasses consumed',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              Spacer(),
+              const Spacer(),
               GestureDetector(
                 onTap: () {
                   setState(() {
@@ -88,7 +90,7 @@ class _WaterTrackerState extends State<WaterTracker> {
                   child: Image.asset('assets/minus.png'),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(right: 15),
                 child: GestureDetector(
@@ -150,12 +152,12 @@ class FoodCard extends StatelessWidget {
                   width: 100,
                   child: Image.asset('assets/break.jpg'),
                 ),
-                Spacer(),
+                const Spacer(),
                 const Text(
                   'Breakfast',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(right: 20),
                   child: SizedBox(
@@ -165,7 +167,7 @@ class FoodCard extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AddFood(
+                            builder: (context) => const AddFood(
                               appBarTitle: 'Breakfast',
                               appBarColor: Colors.deepPurple,
                             ),
@@ -197,12 +199,12 @@ class FoodCard extends StatelessWidget {
                   width: 100,
                   child: Image.asset('assets/lunch.jpg'),
                 ),
-                Spacer(),
+                const Spacer(),
                 const Text(
                   'Lunch',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(right: 20),
                   child: SizedBox(
@@ -212,7 +214,7 @@ class FoodCard extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AddFood(
+                            builder: (context) => const AddFood(
                               appBarTitle: 'Lunch',
                               appBarColor: Colors.green,
                             ),
@@ -244,12 +246,12 @@ class FoodCard extends StatelessWidget {
                   width: 100,
                   child: Image.asset('assets/snacks.jpg'),
                 ),
-                Spacer(),
+                const Spacer(),
                 const Text(
                   'Snacks',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(right: 20),
                   child: SizedBox(
@@ -259,7 +261,7 @@ class FoodCard extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AddFood(
+                            builder: (context) => const AddFood(
                               appBarTitle: 'Snacks',
                               appBarColor: Colors.orange,
                             ),
@@ -291,12 +293,12 @@ class FoodCard extends StatelessWidget {
                   width: 100,
                   child: Image.asset('assets/dinner.jpg'),
                 ),
-                Spacer(),
+                const Spacer(),
                 const Text(
                   'Dinner',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(right: 20),
                   child: SizedBox(
@@ -306,7 +308,7 @@ class FoodCard extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AddFood(
+                            builder: (context) => const AddFood(
                               appBarTitle: 'Dinner',
                               appBarColor: Colors.red,
                             ),
@@ -331,7 +333,7 @@ class FoodCard extends StatelessWidget {
             color: const Color.fromARGB(255, 255, 255, 255),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            child: WaterTracker(),
+            child: const WaterTracker(),
           ),
         ),
         const SizedBox(
@@ -341,7 +343,7 @@ class FoodCard extends StatelessWidget {
           width: double.infinity,
           child: Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
@@ -349,13 +351,13 @@ class FoodCard extends StatelessWidget {
                   Color.fromARGB(255, 78, 123, 182)
                 ],
               ),
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 2,
                   blurRadius: 5,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
@@ -364,7 +366,7 @@ class FoodCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Calculate',
                   style: TextStyle(
                       fontSize: 32,
@@ -372,7 +374,7 @@ class FoodCard extends StatelessWidget {
                       color: Colors.white),
                 ),
                 const SizedBox(height: 10),
-                Text(
+                const Text(
                   'Your',
                   style: TextStyle(
                       fontSize: 24,
@@ -380,7 +382,7 @@ class FoodCard extends StatelessWidget {
                       color: Colors.white),
                 ),
                 const SizedBox(height: 10),
-                Text(
+                const Text(
                   'BMI',
                   style: TextStyle(
                       fontSize: 48,
@@ -396,12 +398,11 @@ class FoodCard extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => BmiScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const BmiScreen()));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 24),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
                     child: Text(
                       'Calculate Now',
                       style:

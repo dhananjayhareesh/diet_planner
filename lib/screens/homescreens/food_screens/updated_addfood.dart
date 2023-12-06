@@ -13,7 +13,7 @@ class AddFoodScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.blue[200],
-        title: Text('Create New Food'),
+        title: const Text('Create New Food'),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: BoxDecoration(

@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:dietplanner_project/database/db_model.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -65,7 +67,7 @@ class _EditDetailsState extends State<EditDetails> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Edit Details'),
+        title: const Text('Edit Details'),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         elevation: 0, // No shadow
@@ -151,13 +153,13 @@ class _EditDetailsState extends State<EditDetails> {
                       Navigator.of(context).pop(updatedUser);
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 15),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       backgroundColor: Colors.indigo,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Save',
                       style: TextStyle(fontSize: 18),
                     ),
@@ -177,17 +179,17 @@ class _EditDetailsState extends State<EditDetails> {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
         controller: controller,
-        style: TextStyle(color: Colors.black),
+        style: const TextStyle(color: Colors.black),
         keyboardType: keyboardType,
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(color: Colors.indigo),
+          labelStyle: const TextStyle(color: Colors.indigo),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.indigo, width: 2.0),
+            borderSide: const BorderSide(color: Colors.indigo, width: 2.0),
             borderRadius: BorderRadius.circular(10.0),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+            borderSide: const BorderSide(color: Colors.grey),
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
@@ -210,13 +212,13 @@ class _EditDetailsState extends State<EditDetails> {
         }).toList(),
         decoration: InputDecoration(
           labelText: label,
-          labelStyle: TextStyle(color: Colors.indigo),
+          labelStyle: const TextStyle(color: Colors.indigo),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.indigo, width: 2.0),
+            borderSide: const BorderSide(color: Colors.indigo, width: 2.0),
             borderRadius: BorderRadius.circular(10.0),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+            borderSide: const BorderSide(color: Colors.grey),
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),

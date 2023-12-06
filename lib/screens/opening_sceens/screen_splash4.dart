@@ -21,30 +21,30 @@ class ScreenSplashFour extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Lottie.asset('assets/Animation - 1701754262001.json'),
-              SizedBox(height: 50),
-              Text(
+              const SizedBox(height: 50),
+              const Text(
                 "Start your journey to better health through a well-balanced, healthy diet.",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 50),
-              Text(
+              const SizedBox(height: 50),
+              const Text(
                 "Let's get started!",
                 style: TextStyle(fontSize: 30),
               ),
-              SizedBox(height: 50),
-              Container(
+              const SizedBox(height: 50),
+              SizedBox(
                 height: 40,
                 width: 200,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return ScreenUserDetails();
+                      return const ScreenUserDetails();
                     }));
                   },
                   style: ElevatedButton.styleFrom(

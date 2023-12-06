@@ -19,7 +19,7 @@ class CalorieBudget extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Container(
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/userbg.jpg'),
             fit: BoxFit.cover,
@@ -57,7 +57,8 @@ class CalorieBudget extends StatelessWidget {
               ),
               Text(
                 user.calorieBudget.toString(),
-                style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+                style:
+                    const TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
               ),
               const SizedBox(
                 height: 100,
@@ -70,9 +71,11 @@ class CalorieBudget extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       await markFinishButtonClicked();
+                      // ignore: use_build_context_synchronously
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => MainBottom()),
+                        MaterialPageRoute(
+                            builder: (context) => const MainBottom()),
                         (route) => false,
                       );
                     },

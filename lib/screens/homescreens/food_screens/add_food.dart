@@ -48,8 +48,6 @@ class _TabFoodState extends State<TabFood> {
 
     // Reset total calories to 0 for the new day
     totalCaloriesBox.put(currentDate, TotalCalories(0));
-
-    print('Data cleared for the new day: $currentDate');
   }
 
   @override
@@ -76,7 +74,6 @@ class _TabFoodState extends State<TabFood> {
     // Recalculate and save total calories
     int totalCalories = calculateTotalCalories();
     totalCaloriesBox.put('totalCalories', TotalCalories(totalCalories));
-    print('Total Calories stored in Hive: $totalCalories');
   }
 
   void updateItemQuantity(FoodItem item) {
@@ -108,8 +105,6 @@ class _TabFoodState extends State<TabFood> {
     // Save the total calories with the current date to Hive
     totalCaloriesBox.put(currentDate, TotalCalories(calculateTotalCalories()));
 
-    print(
-        'Total Calories stored in Hive for $currentDate: ${calculateTotalCalories()}');
     Navigator.pop(context);
   }
 
@@ -129,11 +124,11 @@ class _TabFoodState extends State<TabFood> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "History of added food items",
                 style: TextStyle(fontSize: 20),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Expanded(
@@ -150,8 +145,8 @@ class _TabFoodState extends State<TabFood> {
                         title: Padding(
                           padding: const EdgeInsets.only(top: 5),
                           child: Text(
-                            "${selectedFoodItem.foodItem.name}",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            selectedFoodItem.foodItem.name,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
                         subtitle: Column(
@@ -163,12 +158,12 @@ class _TabFoodState extends State<TabFood> {
                                 "Calories: ${selectedFoodItem.foodItem.calories * selectedFoodItem.quantity} kcal",
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(
                               "Quantity: ${selectedFoodItem.quantity}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blue),
                             ),
@@ -178,7 +173,7 @@ class _TabFoodState extends State<TabFood> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.add),
+                              icon: const Icon(Icons.add),
                               color: Colors.green[700],
                               onPressed: () {
                                 setState(() {
@@ -188,7 +183,7 @@ class _TabFoodState extends State<TabFood> {
                               },
                             ),
                             IconButton(
-                              icon: Icon(Icons.remove),
+                              icon: const Icon(Icons.remove),
                               color: Colors.orange[700],
                               onPressed: () {
                                 setState(() {
@@ -202,7 +197,7 @@ class _TabFoodState extends State<TabFood> {
                               },
                             ),
                             IconButton(
-                              icon: Icon(Icons.delete),
+                              icon: const Icon(Icons.delete),
                               color: Colors.red[700],
                               onPressed: () {
                                 setState(() {
@@ -218,22 +213,22 @@ class _TabFoodState extends State<TabFood> {
                   },
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Align(
                 alignment: Alignment.centerLeft,
                 child: ElevatedButton(
-                  onPressed: addToDietClicked, // Call the modified method
-                  child: Text('Add to diet'),
+                  onPressed: addToDietClicked,
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(16),
-                    backgroundColor: Color.fromARGB(255, 236, 34, 84),
+                    padding: const EdgeInsets.all(16),
+                    backgroundColor: const Color.fromARGB(255, 236, 34, 84),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
-                  ),
+                  ), // Call the modified method
+                  child: const Text('Add to diet'),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 "Today's Total Calories: ${calculateTotalCalories()} kcal",
                 style: TextStyle(fontSize: 15, color: Colors.red[900]),
@@ -246,7 +241,7 @@ class _TabFoodState extends State<TabFood> {
         onPressed: () async {
           FoodItem? selected = await Navigator.push(context,
               MaterialPageRoute(builder: (context) {
-            return SearchFood();
+            return const SearchFood();
           }));
 
           if (selected != null) {
@@ -255,8 +250,8 @@ class _TabFoodState extends State<TabFood> {
             });
           }
         },
-        label: Text('Food'),
-        icon: Icon(Icons.add),
+        label: const Text('Food'),
+        icon: const Icon(Icons.add),
       ),
     );
   }

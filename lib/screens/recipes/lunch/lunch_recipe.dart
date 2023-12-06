@@ -18,7 +18,7 @@ class _LunchRecipeState extends State<LunchRecipe> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Lunch Recipes'),
+        title: const Text('My Lunch Recipes'),
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         centerTitle: true,
         flexibleSpace: Container(
@@ -43,7 +43,7 @@ class _LunchRecipeState extends State<LunchRecipe> {
           valueListenable: Hive.box<RecipeLunch>('lunchrecipes').listenable(),
           builder: (context, Box<RecipeLunch> box, _) {
             return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 20.0,
                 mainAxisSpacing: 20.0,
@@ -108,7 +108,7 @@ class _LunchRecipeState extends State<LunchRecipe> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 6,
                           ),
                           Text(recipe.title),
@@ -126,8 +126,8 @@ class _LunchRecipeState extends State<LunchRecipe> {
         message: "Add New Recipe",
         child: FloatingActionButton(
           onPressed: _navigateToCreateRecipePage,
-          child: Icon(Icons.add),
           backgroundColor: Colors.blue[300],
+          child: const Icon(Icons.add),
         ),
       ),
     );
@@ -136,12 +136,10 @@ class _LunchRecipeState extends State<LunchRecipe> {
   Future<void> _navigateToCreateRecipePage() async {
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CreateRecipeLunch()),
+      MaterialPageRoute(builder: (context) => const CreateRecipeLunch()),
     );
 
-    if (result != null && result is RecipeLunch) {
-      print('New recipe added: ${result.title}');
-    }
+    if (result != null && result is RecipeLunch) {}
   }
 
   void _deleteRecipe(RecipeLunch recipe) {
@@ -149,21 +147,21 @@ class _LunchRecipeState extends State<LunchRecipe> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Recipe'),
+          title: const Text('Delete Recipe'),
           content: Text('Are you sure you want to delete ${recipe.title}?'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
-              child: Text('No'),
+              child: const Text('No'),
             ),
             TextButton(
               onPressed: () {
                 _performDelete(recipe);
                 Navigator.of(context).pop(); // Close the dialog
               },
-              child: Text('Yes'),
+              child: const Text('Yes'),
             ),
           ],
         );
@@ -180,9 +178,6 @@ class _LunchRecipeState extends State<LunchRecipe> {
 
     if (index != -1) {
       recipeBox.deleteAt(index);
-      print('Recipe deleted: ${recipe.title}');
-    } else {
-      print('Recipe not found for deletion: ${recipe.title}');
-    }
+    } else {}
   }
 }

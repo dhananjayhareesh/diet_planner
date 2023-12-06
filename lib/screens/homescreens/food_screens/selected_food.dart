@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class AddFood extends StatefulWidget {
   final String appBarTitle;
   final Color appBarColor;
-  AddFood({super.key, required this.appBarTitle, required this.appBarColor});
+  const AddFood(
+      {super.key, required this.appBarTitle, required this.appBarColor});
 
   @override
   State<AddFood> createState() => _AddFoodState();
@@ -19,7 +20,7 @@ class _AddFoodState extends State<AddFood> {
         backgroundColor: widget.appBarColor,
         title: Text(widget.appBarTitle),
       ),
-      body: TabFood(),
+      body: const TabFood(),
     );
   }
 }

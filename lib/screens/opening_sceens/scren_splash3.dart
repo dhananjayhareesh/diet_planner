@@ -19,14 +19,14 @@ class ScreenSplashThree extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Lottie.asset('assets/Animation - 1698382679000.json'),
-            SizedBox(height: 50),
-            Text(
+            const SizedBox(height: 50),
+            const Text(
               "Create and save your own recipes.",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Keep your favorite dishes just a tap away.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),

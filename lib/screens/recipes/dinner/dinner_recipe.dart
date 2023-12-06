@@ -17,7 +17,7 @@ class _DinnerRecipeState extends State<DinnerRecipe> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Dinner Recipes'),
+        title: const Text('My Dinner Recipes'),
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         centerTitle: true,
         flexibleSpace: Container(
@@ -42,7 +42,7 @@ class _DinnerRecipeState extends State<DinnerRecipe> {
           valueListenable: Hive.box<RecipeDinner>('dinnerrecipes').listenable(),
           builder: (context, Box<RecipeDinner> box, _) {
             return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 20.0,
                 mainAxisSpacing: 20.0,
@@ -107,7 +107,7 @@ class _DinnerRecipeState extends State<DinnerRecipe> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 6,
                           ),
                           Text(recipe.title),
@@ -125,8 +125,8 @@ class _DinnerRecipeState extends State<DinnerRecipe> {
         message: "Add New Recipe",
         child: FloatingActionButton(
           onPressed: _navigateToCreateRecipePage,
-          child: Icon(Icons.add),
           backgroundColor: Colors.blue[300],
+          child: const Icon(Icons.add),
         ),
       ),
     );
@@ -135,12 +135,10 @@ class _DinnerRecipeState extends State<DinnerRecipe> {
   Future<void> _navigateToCreateRecipePage() async {
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CreateRecipeDinner()),
+      MaterialPageRoute(builder: (context) => const CreateRecipeDinner()),
     );
 
-    if (result != null && result is RecipeDinner) {
-      print('New recipe added: ${result.title}');
-    }
+    if (result != null && result is RecipeDinner) {}
   }
 
   void _deleteRecipe(RecipeDinner recipe) {
@@ -148,21 +146,21 @@ class _DinnerRecipeState extends State<DinnerRecipe> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Recipe'),
+          title: const Text('Delete Recipe'),
           content: Text('Are you sure you want to delete ${recipe.title}?'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
-              child: Text('No'),
+              child: const Text('No'),
             ),
             TextButton(
               onPressed: () {
                 _performDelete(recipe);
                 Navigator.of(context).pop(); // Close the dialog
               },
-              child: Text('Yes'),
+              child: const Text('Yes'),
             ),
           ],
         );
@@ -179,9 +177,6 @@ class _DinnerRecipeState extends State<DinnerRecipe> {
 
     if (index != -1) {
       recipeBox.deleteAt(index);
-      print('Recipe deleted: ${recipe.title}');
-    } else {
-      print('Recipe not found for deletion: ${recipe.title}');
-    }
+    } else {}
   }
 }

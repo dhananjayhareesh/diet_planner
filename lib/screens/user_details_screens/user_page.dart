@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:dietplanner_project/database/db_model.dart';
 import 'package:dietplanner_project/screens/user_details_screens/edit_details.dart';
@@ -61,8 +63,8 @@ class _UserPageState extends State<UserPage> {
                   ),
                   child: Row(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 30),
                         child: CircleAvatar(
                           radius: 40,
                           backgroundImage: AssetImage('assets/user.png'),
@@ -76,7 +78,7 @@ class _UserPageState extends State<UserPage> {
                           message: user?.name ?? 'N/A',
                           child: Text(
                             user?.name.toUpperCase() ?? 'N/A',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
                             ),
@@ -104,7 +106,7 @@ class _UserPageState extends State<UserPage> {
                     color: Colors.white,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: Column(
                       children: [
                         buildDetailRow('Name', user?.name ?? 'N/A'),
@@ -142,7 +144,8 @@ class _UserPageState extends State<UserPage> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 30),
                     backgroundColor: Colors.indigo,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
@@ -168,19 +171,19 @@ class _UserPageState extends State<UserPage> {
           children: [
             Text(
               title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Spacer(),
+            const Spacer(),
             Text(
               value,
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
           ],
         ),
-        Divider(
+        const Divider(
           thickness: 1.5,
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
       ],

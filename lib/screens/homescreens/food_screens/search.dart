@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 class SearchFood extends StatefulWidget {
-  SearchFood({Key? key}) : super(key: key);
+  const SearchFood({Key? key}) : super(key: key);
 
   @override
   State<SearchFood> createState() => _SearchFoodState();
@@ -190,15 +190,15 @@ class _SearchFoodState extends State<SearchFood> {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.search),
-                  SizedBox(width: 10),
+                  const Icon(Icons.search),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
                         filterFoodItems(value);
                       },
-                      style: TextStyle(fontSize: 16),
-                      decoration: InputDecoration(
+                      style: const TextStyle(fontSize: 16),
+                      decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "Search your food",
                         hintStyle: TextStyle(fontSize: 16),
@@ -210,7 +210,7 @@ class _SearchFoodState extends State<SearchFood> {
             ),
             Expanded(
               child: filteredFoodItems.isEmpty
-                  ? Center(
+                  ? const Center(
                       child: Text(
                         "No food items found, please create new food",
                         style: TextStyle(fontSize: 18, color: Colors.grey),
@@ -219,9 +219,9 @@ class _SearchFoodState extends State<SearchFood> {
                   : Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: ListView.separated(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         itemCount: filteredFoodItems.length,
-                        separatorBuilder: (context, index) => Divider(),
+                        separatorBuilder: (context, index) => const Divider(),
                         itemBuilder: (context, index) {
                           final foodItem = filteredFoodItems[index];
                           return Card(
@@ -236,7 +236,7 @@ class _SearchFoodState extends State<SearchFood> {
                                 children: [
                                   Text(
                                     foodItem.name,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -253,7 +253,7 @@ class _SearchFoodState extends State<SearchFood> {
                               ),
                               subtitle: Text(
                                 "Calories: ${foodItem.calories} kcal",
-                                style: TextStyle(color: Colors.grey),
+                                style: const TextStyle(color: Colors.grey),
                               ),
                             ),
                           );
@@ -261,11 +261,12 @@ class _SearchFoodState extends State<SearchFood> {
                       ),
                     ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 30),
-                primary: Color.fromARGB(255, 236, 34, 84),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
+                backgroundColor: const Color.fromARGB(255, 236, 34, 84),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
@@ -288,12 +289,12 @@ class _SearchFoodState extends State<SearchFood> {
                   });
                 }
               },
-              child: Text(
+              child: const Text(
                 "Create New Food",
                 style: TextStyle(fontSize: 16),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),

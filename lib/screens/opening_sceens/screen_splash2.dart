@@ -19,14 +19,14 @@ class ScreenSplashTwo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Lottie.asset('assets/Animation - 1698382442951.json'),
-            SizedBox(height: 50),
-            Text(
+            const SizedBox(height: 50),
+            const Text(
               "Customize your diet effortlessly.",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               ' Plan your meals to meet your nutritional goals.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),

@@ -8,6 +8,7 @@ class CreateRecipe extends StatefulWidget {
   const CreateRecipe({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _CreateRecipeState createState() => _CreateRecipeState();
 }
 
@@ -26,7 +27,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.blue[200],
-        title: Text('Create Breakfast Recipe'),
+        title: const Text('Create Breakfast Recipe'),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -54,11 +55,11 @@ class _CreateRecipeState extends State<CreateRecipe> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildInputContainer(titleController, 'Title', 1),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   _buildInputContainer(ingredientsController, 'Ingredients', 3),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   _buildInputContainer(preparationController, 'Preparation', 5),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
@@ -66,15 +67,15 @@ class _CreateRecipeState extends State<CreateRecipe> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 162, 169, 61),
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      backgroundColor: const Color.fromARGB(255, 162, 169, 61),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    child: Text('Add Image'),
+                    child: const Text('Add Image'),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
                     height: 150,
                     width: double.infinity,
@@ -87,18 +88,18 @@ class _CreateRecipeState extends State<CreateRecipe> {
                             _image!,
                             fit: BoxFit.cover,
                           )
-                        : Center(
+                        : const Center(
                             child: Text('No Image Uploaded'),
                           ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
                           if (_image == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 backgroundColor: Colors.red,
                                 content: Text('Image is required'),
                                 duration: Duration(seconds: 2),
@@ -110,13 +111,13 @@ class _CreateRecipeState extends State<CreateRecipe> {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 53, 160, 56),
-                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        backgroundColor: const Color.fromARGB(255, 53, 160, 56),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      child: Text('Add to Recipe List'),
+                      child: const Text('Add to Recipe List'),
                     ),
                   ),
                 ],
@@ -151,7 +152,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
           decoration: InputDecoration(
             labelText: labelText,
             border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
           ),
           maxLines: maxLines,
         ),
@@ -182,16 +183,16 @@ class _CreateRecipeState extends State<CreateRecipe> {
 
     recipeBox.add(newRecipe);
 
-    print('Data stored');
-
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: Colors.blue[300],
         content: Text('New Recipe Added: ${newRecipe.title}'),
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
       ),
     );
 
+    // ignore: use_build_context_synchronously
     Navigator.pop(context, newRecipe);
   }
 }

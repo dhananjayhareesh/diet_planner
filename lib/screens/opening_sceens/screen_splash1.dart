@@ -19,13 +19,13 @@ class ScreenSplashOne extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Lottie.asset('assets/Animation - 1698383959939.json'),
-            SizedBox(height: 50),
-            Text(
+            const SizedBox(height: 50),
+            const Text(
               "Welcome to HAPPY DIET!",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Where a healthier you begins with every meal.',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18),

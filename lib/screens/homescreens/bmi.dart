@@ -4,6 +4,7 @@ class BmiScreen extends StatefulWidget {
   const BmiScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _BmiScreenState createState() => _BmiScreenState();
 }
 
@@ -21,7 +22,7 @@ class _BmiScreenState extends State<BmiScreen> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
         centerTitle: true,
-        title: Text('BMI Calculator'),
+        title: const Text('BMI Calculator'),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -50,10 +51,10 @@ class _BmiScreenState extends State<BmiScreen> {
                   'assets/bmi.avif',
                   height: 100,
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Row(
                   children: [
-                    Text('Select Gender: '),
+                    const Text('Select Gender: '),
                     DropdownButton<String>(
                       value: selectedGender,
                       onChanged: (String? newValue) {
@@ -61,8 +62,9 @@ class _BmiScreenState extends State<BmiScreen> {
                           selectedGender = newValue!;
                         });
                       },
-                      style: TextStyle(color: Colors.blue),
-                      icon: Icon(Icons.arrow_drop_down, color: Colors.blue),
+                      style: const TextStyle(color: Colors.blue),
+                      icon:
+                          const Icon(Icons.arrow_drop_down, color: Colors.blue),
                       underline: Container(
                         height: 2,
                         color: Colors.blue,
@@ -73,7 +75,7 @@ class _BmiScreenState extends State<BmiScreen> {
                             value: value,
                             child: Text(
                               value,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                           );
@@ -82,32 +84,32 @@ class _BmiScreenState extends State<BmiScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 TextField(
                   controller: weightController,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Enter your weight (kg)',
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 TextField(
                   controller: heightController,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Enter your height (cm)',
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
                     calculateBMI();
                   },
-                  child: Text('Calculate BMI'),
+                  child: const Text('Calculate BMI'),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Text(
                   'BMI: ${bmiResult.toStringAsFixed(2)}',
                   style: TextStyle(
@@ -115,15 +117,15 @@ class _BmiScreenState extends State<BmiScreen> {
                       fontWeight: FontWeight.bold,
                       color: getColorForBMI(bmiResult)),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Text(
                   'Result: $resultStatus',
                   style: TextStyle(
                       fontSize: 18.0, color: getColorForBMI(bmiResult)),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 if (bmiResult >= 18.5 && bmiResult < 24.9) ...[
-                  Text(
+                  const Text(
                     'Your current weight is within the normal range for BMI.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -132,7 +134,7 @@ class _BmiScreenState extends State<BmiScreen> {
                     ),
                   ),
                 ] else ...[
-                  Text(
+                  const Text(
                     'To achieve a normal weight, consider maintaining weight within the range of BMI 18.5 to 24.9.',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18.0, color: Colors.black),

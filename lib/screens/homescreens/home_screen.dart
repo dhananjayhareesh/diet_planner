@@ -79,8 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ?.total ??
         0;
 
-    print('Total Calories from Hive: $totalCalories');
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -101,8 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => UserPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const UserPage()));
           },
           icon: const Icon(Icons.person_2_rounded),
         ),
@@ -117,13 +115,13 @@ class _HomeScreenState extends State<HomeScreen> {
               }
             },
             itemBuilder: (BuildContext context) => [
-              PopupMenuItem<String>(
+              const PopupMenuItem<String>(
                 value: 'share',
-                child: const Text('Share App'),
+                child: Text('Share App'),
               ),
-              PopupMenuItem<String>(
+              const PopupMenuItem<String>(
                 value: 'rate',
-                child: const Text('Rate Us'),
+                child: Text('Rate Us'),
               ),
             ],
           ),
@@ -150,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: const LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
@@ -158,38 +156,38 @@ class _HomeScreenState extends State<HomeScreen> {
                           Color.fromARGB(255, 64, 119, 192)
                         ],
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 20, top: 20),
+                          padding: const EdgeInsets.only(left: 20, top: 20),
                           child: Row(
                             children: [
                               Text(
                                 'Welcome, ${user.name}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Text(
                                 DateFormat('dd-MM-yyyy').format(DateTime.now()),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 251, 249, 249),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 20,
                               )
                             ],
@@ -221,16 +219,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                               totalCalories)
                                       .toStringAsFixed(0),
                                   // Display remaining calories
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
-                                Text(
+                                const Text(
                                   'Cal Remaining',
                                   style: TextStyle(
                                     color: Colors.white,
@@ -243,9 +241,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 80),
-                          child: const Row(
+                          child: Row(
                             children: [
                               Text(
                                 'Consumed',
@@ -278,9 +276,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Text(
                                 '$totalCalories Cals', // Updated line
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               SizedBox(
                                 height: 18,
                                 width: 18,
@@ -291,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Text(
                                 user.calorieBudget.toString(),
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ],
                           ),

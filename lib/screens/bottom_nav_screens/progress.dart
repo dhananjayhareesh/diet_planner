@@ -1,11 +1,14 @@
 import 'package:dietplanner_project/database/db_goal.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:hive/hive.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 
 class GoalTrackerScreen extends StatefulWidget {
+  const GoalTrackerScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _GoalTrackerScreenState createState() => _GoalTrackerScreenState();
 }
 
@@ -29,7 +32,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Goal Tracker'),
+        title: const Text('Goal Tracker'),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -58,34 +61,36 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
               children: [
                 _buildSectionTitle('Your Goals'),
                 _buildGoalsContainer(),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 _buildSectionTitle('Your Progress'),
                 _buildProgressContainer(),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[600],
-                    textStyle: TextStyle(fontSize: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    textStyle: const TextStyle(fontSize: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                   onPressed: () => _showAddGoalDialog(context),
-                  child: Text('Add Goal'),
+                  child: const Text('Add Goal'),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[600],
-                    textStyle: TextStyle(fontSize: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    textStyle: const TextStyle(fontSize: 16),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                   onPressed: () => _showAddProgressDialog(context),
-                  child: Text('Log Progress'),
+                  child: const Text('Log Progress'),
                 ),
               ],
             ),
@@ -108,7 +113,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
 
   Widget _buildGoalsContainer() {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -126,7 +131,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -135,7 +140,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
         builder: (context, Box<UserGoal> box, _) {
           List<UserGoal> goals = box.values.toList();
           return goals.isEmpty
-              ? Center(
+              ? const Center(
                   child: Text(
                     'No goals set yet. Start setting your goals now!',
                     style: TextStyle(fontSize: 16),
@@ -146,12 +151,12 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
                       .map(
                         (goal) => Card(
                           elevation: 2,
-                          margin: EdgeInsets.symmetric(vertical: 8),
+                          margin: const EdgeInsets.symmetric(vertical: 8),
                           color: Colors.blue[50],
                           child: ListTile(
                             title: Text(
                               goal.title,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             subtitle: Text(
@@ -163,12 +168,12 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 IconButton(
-                                  icon: Icon(Icons.edit),
+                                  icon: const Icon(Icons.edit),
                                   onPressed: () =>
                                       _showEditGoalDialog(context, goal),
                                 ),
                                 IconButton(
-                                  icon: Icon(Icons.delete),
+                                  icon: const Icon(Icons.delete),
                                   onPressed: () => _deleteGoal(goal),
                                 ),
                               ],
@@ -188,13 +193,13 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title:
-              Text('Edit Goal', style: TextStyle(fontWeight: FontWeight.bold)),
+          title: const Text('Edit Goal',
+              style: TextStyle(fontWeight: FontWeight.bold)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                decoration: InputDecoration(labelText: 'Goal Title'),
+                decoration: const InputDecoration(labelText: 'Goal Title'),
                 controller: TextEditingController(text: goal.title),
                 onChanged: (value) {
                   setState(() {
@@ -203,7 +208,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
                 },
               ),
               TextField(
-                decoration: InputDecoration(labelText: 'Target Value'),
+                decoration: const InputDecoration(labelText: 'Target Value'),
                 keyboardType: TextInputType.number,
                 controller:
                     TextEditingController(text: goal.targetValue.toString()),
@@ -214,7 +219,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
                 },
               ),
               TextField(
-                decoration: InputDecoration(labelText: 'Unit'),
+                decoration: const InputDecoration(labelText: 'Unit'),
                 controller: TextEditingController(text: goal.unit),
                 onChanged: (value) {
                   setState(() {
@@ -229,14 +234,14 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
                 _editGoal(goal);
                 Navigator.of(context).pop();
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
           ],
         );
@@ -257,21 +262,21 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Goal'),
-          content: Text('Have you achieved your goal?'),
+          title: const Text('Delete Goal'),
+          content: const Text('Have you achieved your goal?'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('No'),
+              child: const Text('No'),
             ),
             TextButton(
               onPressed: () {
                 _confirmDeleteGoal(goal);
                 Navigator.of(context).pop();
               },
-              child: Text('Yes'),
+              child: const Text('Yes'),
             ),
           ],
         );
@@ -286,7 +291,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
 
   Widget _buildProgressContainer() {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -304,7 +309,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -313,7 +318,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
         builder: (context, Box<UserProgress> box, _) {
           List<UserProgress> progressList = box.values.toList();
           return progressList.isEmpty
-              ? Center(
+              ? const Center(
                   child: Text(
                     'No progress logged yet. Keep working towards your goals!',
                     style: TextStyle(fontSize: 16),
@@ -324,12 +329,12 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
                       .map(
                         (progress) => Card(
                           elevation: 2,
-                          margin: EdgeInsets.symmetric(vertical: 8),
+                          margin: const EdgeInsets.symmetric(vertical: 8),
                           color: Colors.blue[50],
                           child: ListTile(
                             title: Text(
                               'Progress on ${_formatDate(progress.date)}',
-                              style: TextStyle(fontSize: 15),
+                              style: const TextStyle(fontSize: 15),
                             ),
                             subtitle: Text(
                               'Achieved: ${progress.achievedValue}',
@@ -337,7 +342,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
                                   fontSize: 14, color: Colors.grey[700]),
                             ),
                             trailing: IconButton(
-                              icon: Icon(Icons.delete),
+                              icon: const Icon(Icons.delete),
                               onPressed: () => _deleteProgress(progress),
                             ),
                           ),
@@ -355,21 +360,22 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Progress'),
-          content: Text('Are you sure you want to delete this progress entry?'),
+          title: const Text('Delete Progress'),
+          content: const Text(
+              'Are you sure you want to delete this progress entry?'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('No'),
+              child: const Text('No'),
             ),
             TextButton(
               onPressed: () {
                 _confirmDeleteProgress(progress);
                 Navigator.of(context).pop();
               },
-              child: Text('Yes'),
+              child: const Text('Yes'),
             ),
           ],
         );
@@ -391,13 +397,13 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Add New Goal',
+          title: const Text('Add New Goal',
               style: TextStyle(fontWeight: FontWeight.bold)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                decoration: InputDecoration(labelText: 'Goal Title'),
+                decoration: const InputDecoration(labelText: 'Goal Title'),
                 onChanged: (value) {
                   setState(() {
                     newGoalTitle = value;
@@ -405,7 +411,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
                 },
               ),
               TextField(
-                decoration: InputDecoration(labelText: 'Target Value'),
+                decoration: const InputDecoration(labelText: 'Target Value'),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   setState(() {
@@ -414,7 +420,7 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
                 },
               ),
               TextField(
-                decoration: InputDecoration(labelText: 'Unit'),
+                decoration: const InputDecoration(labelText: 'Unit'),
                 onChanged: (value) {
                   setState(() {
                     newGoalUnit = value;
@@ -428,14 +434,14 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
                 _saveNewGoal();
                 Navigator.of(context).pop();
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
           ],
         );
@@ -458,13 +464,13 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Log Progress',
+          title: const Text('Log Progress',
               style: TextStyle(fontWeight: FontWeight.bold)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                decoration: InputDecoration(labelText: 'Achieved Value'),
+                decoration: const InputDecoration(labelText: 'Achieved Value'),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   setState(() {
@@ -479,14 +485,14 @@ class _GoalTrackerScreenState extends State<GoalTrackerScreen> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
                 _saveProgressEntry();
                 Navigator.of(context).pop();
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
           ],
         );

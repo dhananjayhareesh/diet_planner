@@ -1,7 +1,6 @@
 import 'package:dietplanner_project/database/db_waterintake.dart';
 import 'package:dietplanner_project/database/model_totalcalories.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:dietplanner_project/utils/bottom_nav_utils/diary_utils.dart';
 
@@ -9,6 +8,7 @@ class ScreenDiary extends StatefulWidget {
   const ScreenDiary({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ScreenDiaryState createState() => _ScreenDiaryState();
 }
 
@@ -17,7 +17,7 @@ class _ScreenDiaryState extends State<ScreenDiary> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Diary'),
+        title: const Text('Your Diary'),
         centerTitle: true,
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromARGB(255, 40, 139, 220),
@@ -88,7 +88,7 @@ class _ScreenDiaryState extends State<ScreenDiary> {
                                   color: Colors.blue[700],
                                 ),
                               ),
-                              SizedBox(height: 12),
+                              const SizedBox(height: 12),
                               buildInfoRow(
                                   'Calorie Intake', '$totalCalories kcal'),
                               buildInfoRow(

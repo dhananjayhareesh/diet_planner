@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:dietplanner_project/database/db_dinnerrecipe.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class DinnerEdit extends StatefulWidget {
   final RecipeDinner recipe;
+  // ignore: use_key_in_widget_constructors
   const DinnerEdit({Key? key, required this.recipe});
 
   @override
@@ -25,7 +28,7 @@ class _DinnerEditState extends State<DinnerEdit> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Brekfast Recipe'),
+        title: const Text('Edit Brekfast Recipe'),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -51,13 +54,13 @@ class _DinnerEditState extends State<DinnerEdit> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildInputContainer(ingredientsController, 'Ingredients', 3),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               _buildInputContainer(preparationController, 'Preparation', 5),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 53, 160, 56),
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                  backgroundColor: const Color.fromARGB(255, 53, 160, 56),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -65,7 +68,7 @@ class _DinnerEditState extends State<DinnerEdit> {
                 onPressed: () {
                   _updateRecipe();
                 },
-                child: Text('Save Changes'),
+                child: const Text('Save Changes'),
               ),
             ],
           ),
@@ -91,7 +94,7 @@ class _DinnerEditState extends State<DinnerEdit> {
           decoration: InputDecoration(
             labelText: labelText,
             border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
           ),
           maxLines: maxLines,
         ),
@@ -114,7 +117,7 @@ class _DinnerEditState extends State<DinnerEdit> {
     await recipesBox.putAt(recipeIndex, widget.recipe);
 
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text('Recipe Updated'),
         duration: Duration(seconds: 2),
       ),
