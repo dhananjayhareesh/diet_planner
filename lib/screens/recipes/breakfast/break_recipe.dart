@@ -177,6 +177,6 @@ class _BreakRecipeState extends State<BreakRecipe> {
 
     if (index != -1) {
       recipeBox.deleteAt(index);
-    } else {}
+    }
   }
 }

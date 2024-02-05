@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CreateRecipeDinner extends StatefulWidget {
   const CreateRecipeDinner({Key? key}) : super(key: key);
@@ -205,8 +206,15 @@ class _CreateRecipeState extends State<CreateRecipeDinner> {
 
     final imageTemporary = File(image.path);
 
+    final appDir = await getApplicationDocumentsDirectory();
+    final fileName = imageTemporary.path.split('/').last;
+    final imagePath = '${appDir.path}/$fileName';
+
+    // Copy the image file to the permanent location
+    final File newImage = await imageTemporary.copy(imagePath);
+
     setState(() {
-      _image = imageTemporary;
+      _image = newImage;
     });
   }
 
