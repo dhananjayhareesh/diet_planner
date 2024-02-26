@@ -7,7 +7,7 @@ import 'package:dietplanner_project/database/db_waterintake.dart';
 import 'package:dietplanner_project/database/model_food.dart';
 import 'package:dietplanner_project/database/model_selected_food.dart';
 import 'package:dietplanner_project/database/model_totalcalories.dart';
-import 'package:dietplanner_project/screens/opening_sceens/splash.dart';
+import 'package:dietplanner_project/views/opening_sceens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -45,7 +45,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: const SplashScreen(),
     );
   }

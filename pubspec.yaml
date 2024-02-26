@@ -87,11 +87,11 @@ flutter:
      - assets/leftar.png
      - assets/rightar.png
      - assets/bfast.jpg
-     - assets/lunch.jpg
-     - assets/snacks.jpg
-     - assets/dinner.jpg
+     - assets/lunch.png
+     - assets/snacks.png
+     - assets/dinner.png
      - assets/plus-sign.png
-     - assets/water.jpg
+     - assets/water.png
      - assets/plus.png
      - assets/minus.png
      - assets/diary.png
@@ -104,7 +104,7 @@ flutter:
      - assets/Animation - 1698383959939.json
      - assets/Animation - 1698384804398.json
      - assets/fire.png
-     - assets/break.jpg
+     - assets/break.png
      - assets/dinnner.avif
      - assets/diet.png
      - assets/user.png
